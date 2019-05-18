@@ -53,3 +53,15 @@ The state space has 37 dimensions and contains the agent's velocity, along with 
 
 The task is episodic, and in order to solve the environment, your agent must get an average score of +13 over 100 consecutive episodes.
 
+
+## Unit Test 
+```
+python -m unittest discover unit_tests -v
+```
+
+## To experiment with different parameters and environment (Defaut is LunarLander-v2)
+```
+python agent_experiment.py --device gpu 
+
+python agent_experiment.py --device gpu --env Banana_unity --max_t 1000 --batch_size 64 --num_episodes 200 --score_threshold 13 --score_window_size 5 --update_every 10 --eps_decay 0.99
+```
