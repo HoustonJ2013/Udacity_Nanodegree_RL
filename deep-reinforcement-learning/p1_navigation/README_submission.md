@@ -73,3 +73,6 @@ In order to run LunarLander-v2
 gym 0.10.8
 conda install swig 
 pip install box2d-py
+
+## Prioritized Replay Buffer
+Adaped from the [code example](https://github.com/MorvanZhou/Reinforcement-learning-with-tensorflow/blob/master/contents/5.2_Prioritized_Replay_DQN/RL_brain.py) 
