@@ -61,7 +61,18 @@ python -m unittest discover unit_tests -v
 
 ## To experiment with different parameters and environment (Defaut is LunarLander-v2)
 ```
-python agent_experiment.py --device gpu 
+python agent_experiment.py --device gpu ## Ordinary replaybuffer
+python agent_experiment.py --device gpu --per per ## Prioritized Replay Buffer
 
 python agent_experiment.py --device gpu --env Banana_unity --max_t 1000 --batch_size 64 --num_episodes 200 --score_threshold 13 --score_window_size 5 --update_every 10 --eps_decay 0.99
 ```
+
+## Setup Note
+In order to run LunarLander-v2
+
+gym 0.10.8
+conda install swig 
+pip install box2d-py
+
+## Prioritized Replay Buffer
+Adaped from the [code example](https://github.com/MorvanZhou/Reinforcement-learning-with-tensorflow/blob/master/contents/5.2_Prioritized_Replay_DQN/RL_brain.py) 

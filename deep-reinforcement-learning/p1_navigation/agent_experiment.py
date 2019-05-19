@@ -8,7 +8,8 @@ from dqn.dqn_agent import UnityEnvironment, Agent, UnityEnv_simple, ReplayBuffer
 import torch
 import torch.nn.functional as F
 import torch.optim as optim
-import pickle 
+import pickle
+from time import gmtime, strftime
 
 def main(args):
 
@@ -34,6 +35,11 @@ def main(args):
     else:
         device = torch.device("cuda:0")
 
+    ## Whether to use prioritized replay buffer
+    use_prioritized_replay = args.per
+    if args.per:
+        print("Using Prioritized Replay")
+
     agent = Agent(state_size=state_size, 
                   action_size=action_size, 
                   seed=42,
@@ -43,6 +49,7 @@ def main(args):
                   tau=args.tau, 
                   lr=args.lr,
                   update_every=args.update_every,
+                  per=use_prioritized_replay, 
                   device=device, 
                   loss=args.loss,
                  )
@@ -62,6 +69,10 @@ def main(args):
     scores_window = deque(maxlen=args.score_window_size)  # last 100 scores
     game_length = deque(maxlen=args.score_window_size)
     eps = args.eps_start                    # initialize epsilon
+
+    ## Current time string 
+    now_string = strftime("%Y_%m_%d_%H_%M_%S", gmtime()) 
+
     for i_episode in range(1, n_episodes+1):
         state = env.reset()
         score = 0
@@ -88,20 +99,23 @@ def main(args):
                 .format(i_episode, np.mean(scores_window), np.mean(game_length), eps, np.mean(agent.running_loss)))
         if np.mean(scores_window)>=args.score_threshold:
             print('\nEnvironment solved in {:d} episodes!\tAverage Score: {:.2f} current eps :{:.4f}'.format(i_episode-100, np.mean(scores_window), eps))
-            check_point_name = args.env + "_episodes_", str(i_episode) + "_score_" + str(np.mean(scores_window)) + "_checkpoint.pth"
+            check_point_name = args.env + "_episodes_" + str(i_episode) + "_score_" + str(np.mean(scores_window)) + now_string + \
+                "_" +  args.testname + "_checkpoint.pth"
             torch.save(agent.qnetwork_local.state_dict(), "models/" + check_point_name)
             break
-    score_name = args.env + "_episodes_" + str(i_episode) + "_score_" + str(np.mean(scores_window)) + "_scores"
+    
+    score_name = args.env + "_episodes_" + str(i_episode) + "_score_" + str(np.mean(scores_window)) + now_string + "_" +  args.testname +  "_scores"
     np.save("models/" + score_name, scores)
-    replay_buffer_name = args.env + "_replay_buffer"
-    replay_buffer = [tem_._asdict() for tem_ in list(agent.memory.memory)]
-    with open("models/" + replay_buffer_name, "wb") as pickle_file:
-        pickle.dump(replay_buffer, pickle_file)
+    # replay_buffer_name = args.env + now_string + "_replay_buffer_" + args.testname
+    # replay_buffer = [tem_._asdict() for tem_ in list(agent.memory.memory)]
+    # with open("models/" + replay_buffer_name, "wb") as pickle_file:
+    #     pickle.dump(replay_buffer, pickle_file)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     ## Agent related parameters
-    parser.add_argument('--buffer_size', type=int, default=int(1e5))
+    parser.add_argument('--per', action="store_true", default=False)
+    parser.add_argument('--buffer_size', type=int, default=int(1e4))
     parser.add_argument('--batch_size', type=int, default=64)
     parser.add_argument('--gamma', type=float, default=0.99)
     parser.add_argument('--tau', type=float, default=1e-3)
@@ -122,6 +136,8 @@ if __name__ == "__main__":
 
     parser.add_argument('--workers', type=int, default=8)
     parser.add_argument('--device', type=str, default="cpu")
+
+    parser.add_argument('--testname', type=str, default="")
 
     # parser.add_argument('--log_dir', type=str,
     #                     default="../logs/",
