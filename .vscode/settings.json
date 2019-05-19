@@ -1,3 +1,11 @@
 {
-    "python.pythonPath": "/home/jingbo/anaconda3/envs/rlearning/bin/python"
+    "python.pythonPath": "/home/jingbo/anaconda3/envs/rlearning/bin/python",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.linting.pylintArgs": [
+        "--errors-only",
+        "--generated-members=numpy.* ,torch.* ,cv2.* , cv.*"
+        ]
+        
+        
 }
