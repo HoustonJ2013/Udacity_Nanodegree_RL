@@ -116,6 +116,7 @@ class Agent():
         """
         if self.per:
             tree_idx, batch_memory, ISWeights = self.memory.sample()
+            # assert np.sum(ISWeights.to(torch.device("cpu")).data.numpy()) != 0
             states, actions, rewards, next_states, dones = batch_memory
         else: 
             states, actions, rewards, next_states, dones = self.memory.sample()
@@ -132,9 +133,10 @@ class Agent():
         Q_net = output[torch.arange(self.batch_size), actions.flatten()].reshape(-1, 1)
         # assert Q_net.shape == torch.Size([self.batch_size, 1])
         if self.per: 
-            abs_error = self._abs_error(Q_net, target).to(torch.device("cpu"))
+            abs_error = self._abs_error(Q_net, target).to(torch.device("cpu")).data.numpy()
             loss = self._weighted_mse_loss(Q_net, target, ISWeights)
-            self.memory.batch_update(tree_idx, abs_error.data.numpy())
+            self.memory.batch_update(tree_idx, abs_error)
+            assert np.sum(abs_error) != 0
         else:
             loss = self.criteron(Q_net, target)
         

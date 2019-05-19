@@ -82,7 +82,6 @@ class AgentTest(TestCase):
         qnet = torch.rand(self.batch_size).reshape(-1, 1)
         target = torch.rand(self.batch_size).reshape(-1, 1)
         abs_error = self.agent._abs_error(qnet, target)
-        print(abs_error.shape)
         self.assertTrue(abs_error.shape == torch.Size([self.batch_size]))
 
 
@@ -138,11 +137,28 @@ class PrioritizedReplayBufferTest(TestCase):
             state, action, reward, next_state, done = \
             np.array([3, 4, i_]), np.array([2]), 3, np.array([2, 3, 5]), False
             self.replaybuffer.add(state, action, reward, next_state, done)
+
         tree_idx, batch_memory, ISWeights = self.replaybuffer.sample()
         states, actions, rewards, next_states, dones = batch_memory
-        print(ISWeights)
         # Test size
         self.assertEqual(actions.shape, torch.Size([self.batch_size, self.action_size]))
         self.assertEqual(rewards.shape, torch.Size([self.batch_size, 1]))
+        self.assertEqual(ISWeights.shape, torch.Size([self.batch_size, 1]))
         self.assertEqual(dones.shape, torch.Size([self.batch_size, 1]))
         self.assertEqual(ISWeights.shape, torch.Size([self.batch_size, 1]))
+
+    def test_batch_update(self):
+        for i_ in range(2 * self.buffer_size):
+            state, action, reward, next_state, done = \
+            np.array([3, 4, i_]), np.array([2]), 3, np.array([2, 3, 5]), False
+            self.replaybuffer.add(state, action, reward, next_state, done)
+        total_p_b = self.replaybuffer.memory.total_p
+        tree_idx, batch_memory, ISWeights = self.replaybuffer.sample()
+        abs_errors = np.arange(1, self.batch_size + 1, dtype="float") / self.buffer_size
+        self.replaybuffer.batch_update(tree_idx, abs_errors)
+        tree_idx2, batch_memory, ISWeights = self.replaybuffer.sample()
+        total_p_a = self.replaybuffer.memory.total_p
+        ## Assert batch update updated the priority
+        self.assertTrue(abs(total_p_b - total_p_a) > 0)
+        ## Assert the two random sample doesn't give the same tree_idx2
+        self.assertTrue((tree_idx != tree_idx2).any()) 
