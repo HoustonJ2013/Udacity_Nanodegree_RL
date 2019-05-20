@@ -225,6 +225,8 @@ class ReplayBuffer:
 class UnityEnv_simple():
     '''
     Simply the syntax for Unity environment, make it similar to gym
+    Dedicated for banana environment. The state scaling is hard coded 
+    for banana
     '''
     def __init__(self, env_file):
         self.env = UnityEnvironment(file_name=env_file)

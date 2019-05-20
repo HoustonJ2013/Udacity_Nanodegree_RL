@@ -97,7 +97,7 @@ def main(args):
         if i_episode % args.score_window_size == 0:
             print('\rEpisode {}\tAverage Score: {:.2f} and Average game length {} current eps {:.04f} running_loss {}'\
                 .format(i_episode, np.mean(scores_window), np.mean(game_length), eps, np.mean(agent.running_loss)))
-        if np.mean(scores_window)>=args.score_threshold:
+        if np.mean(scores_window)>=args.score_threshold or i_episode == n_episodes:
             print('\nEnvironment solved in {:d} episodes!\tAverage Score: {:.2f} current eps :{:.4f}'.format(i_episode-100, np.mean(scores_window), eps))
             check_point_name = args.env + "_episodes_" + str(i_episode) + "_score_" + str(np.mean(scores_window)) + now_string + \
                 "_" +  args.testname + "_checkpoint.pth"
