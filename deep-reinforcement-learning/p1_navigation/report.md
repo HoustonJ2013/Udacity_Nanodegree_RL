@@ -110,11 +110,22 @@ python agent_experiment.py --device gpu --env Banana_unity --max_t 1000 --batch_
 ## 2.5 Results: 
 LunarLander-V2            |  Banana Unity    
 :---------------:|:--------------:
-<img src="models/LunarLander-v2_scores.png" width=350 alt="LunarLander" ALIGN="Middle">|<img src="models/Banana_unity_scores.png" width=350  alt="Banana" ALIGN="Middle">
+<img src="models/LunarLander-v2_scores.png" width=360 alt="LunarLander" ALIGN="Middle">|<img src="models/Banana_unity_scores.png" width=360  alt="Banana" ALIGN="Middle">
 
 Note in the banana unity environment, when the agent reached the threshold performance of score 13, the eps is still ~0.3. This may contributes to the similar performance of prioritized experience replay (PER) and regular replay buffer. 
+
+Current unity environment doesn't provide a easy way to save images, so please refer notebook/Visualize_agent_play to visualize the play by the trained agent with jupyter notebook. The same jupyter notebook provide a way to save LunarLander-v2 into avi, and then converted to gif by using ffmpeg. 
+```
+ffmpeg -i video.avi -t 10 out%d.gif
+```
+LunarLander-V2  Random Play |  LunarLander-V2  Agent Play
+:---------------:|:--------------:
+<img src="videos/random.gif" width=360 alt="random" ALIGN="Middle">|<img src="videos/trained.gif" width=360  alt="agent" ALIGN="Middle">
+
 
 # Future improvements
 - Optimize the training efficiency, e.g. parallelize the agent experience collection, improve the efficiency of current sumtree (for PER) implementaion. 
 - Improve the hyperparameters after efficiency is improved
 - Implement Dueling DQN
+- Test current implementation with self-designed game - spaceinvader. 
+

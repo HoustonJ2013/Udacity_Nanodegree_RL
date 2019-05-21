@@ -26,8 +26,8 @@ UPDATE_EVERY = 4        # how often to update the network
 class Agent():
     """Interacts with and learns from the environment."""
 
-    def __init__(self, state_size, action_size, seed, 
-                device, ## torch.device("cuda:0") or torch.device("cpu")
+    def __init__(self, state_size, action_size, seed=42, 
+                device=torch.device("cpu"), ## torch.device("cuda:0") or torch.device("cpu")
                 buffer_size=BUFFER_SIZE, 
                 batch_size=BATCH_SIZE,
                 gamma=GAMMA,  
@@ -231,10 +231,10 @@ class UnityEnv_simple():
     def __init__(self, env_file):
         self.env = UnityEnvironment(file_name=env_file)
         self.brain_name = self.env.brain_names[0]
+        self.env_info = self.env.reset(train_mode=True)[self.brain_name]
         self.brain = self.env.brains[self.brain_name]
         self.action_size = self.brain.vector_action_space_size
-        env_info = self.env.reset(train_mode=True)[self.brain_name]
-        state = env_info.vector_observations[0]
+        state = self.env_info.vector_observations[0]
         self.state_size = len(state)
         self.state_min = np.zeros(self.state_size)
         self.state_min[-2:] = [-4, -12.5]
@@ -242,14 +242,14 @@ class UnityEnv_simple():
         self.state_max[-2:] = [4, 12.5]
 
     def reset(self, train_mode=True):
-        env_info = self.env.reset(train_mode=train_mode)[self.brain_name]
-        return self._state_scaler(env_info.vector_observations[0])
+        self.env_info = self.env.reset(train_mode=train_mode)[self.brain_name]
+        return self._state_scaler(self.env_info.vector_observations[0])
 
     def step(self, action):
-        env_info = self.env.step(action)[self.brain_name]
-        next_state = env_info.vector_observations[0]
-        reward = env_info.rewards[0]  
-        done = env_info.local_done[0] 
+        self.env_info = self.env.step(action)[self.brain_name]
+        next_state = self.env_info.vector_observations[0]
+        reward = self.env_info.rewards[0]  
+        done = self.env_info.local_done[0] 
         return self._state_scaler(next_state), reward, done, "dummy"
 
     def render(self):
