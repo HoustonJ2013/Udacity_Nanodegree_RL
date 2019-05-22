@@ -114,7 +114,9 @@ LunarLander-V2            |  Banana Unity
 
 Note in the banana unity environment, when the agent reached the threshold performance of score 13, the eps is still ~0.3. This may contributes to the similar performance of prioritized experience replay (PER) and regular replay buffer. 
 
-Current unity environment doesn't provide a easy way to save images, so please refer notebook/Visualize_agent_play to visualize the play by the trained agent with jupyter notebook. The same jupyter notebook provide a way to save LunarLander-v2 into avi, and then converted to gif by using ffmpeg. 
+Current unity environment doesn't provide a easy way to save images, so please refer notebook/Visualize_agent_play.ipynb to visualize the play by the trained agent with jupyter notebook. The same jupyter notebook provide a way to save LunarLander-v2 into avi, and then converted to gif by using ffmpeg. 
+
+The submitted models for Banana Unity is models/Banana_unity_episodes_2000_score_15.022019_05_19_20_17_50_banana_per_20_checkpoint.pth. Please refer [this notebook](notebook/Visualize_agent_play.ipynb) for usage. 
 ```
 ffmpeg -i video.avi -t 10 out%d.gif
 ```
