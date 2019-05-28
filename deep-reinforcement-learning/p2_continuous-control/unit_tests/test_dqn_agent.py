@@ -3,6 +3,7 @@ import numpy as np
 from agents.dqn_agent import Agent, ReplayBuffer, PrioritizedReplayBuffer
 import torch
 
+
 class ReplayBufferTest(TestCase):
 
     def setUp(self):

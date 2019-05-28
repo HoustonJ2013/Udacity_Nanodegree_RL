@@ -77,11 +77,8 @@ class Agent():
     
     def step(self, state, action, reward, next_state, done):
         # Save experience in replay memory
-        if len(reward) > 1:
-            for i in range(len(reward)):
-                self.memory.add(state[i,:], action[i,:], reward[i], next_state[i, :], done[i])
-        else:
-            self.memory.add(state, action, reward, next_state, done)
+        self.memory.add(state, action, reward, next_state, done)
+        
         # Learn every UPDATE_EVERY time steps.
         self.t_step = (self.t_step + 1) % self.update_every
         if self.t_step == 0:
@@ -223,6 +220,47 @@ class ReplayBuffer:
     def __len__(self):
         """Return the current size of internal memory."""
         return len(self.memory)
+
+
+class UnityEnv_simple():
+    '''
+    Simply the syntax for Unity environment, make it similar to gym
+    Dedicated for banana environment. The state scaling is hard coded 
+    for banana
+    '''
+    def __init__(self, env_file):
+        self.env = UnityEnvironment(file_name=env_file)
+        self.brain_name = self.env.brain_names[0]
+        self.env_info = self.env.reset(train_mode=True)[self.brain_name]
+        self.brain = self.env.brains[self.brain_name]
+        self.action_size = self.brain.vector_action_space_size
+        state = self.env_info.vector_observations[0]
+        self.state_size = len(state)
+        self.state_min = np.zeros(self.state_size)
+        self.state_min[-2:] = [-4, -12.5]
+        self.state_max = np.ones(self.state_size)
+        self.state_max[-2:] = [4, 12.5]
+
+    def reset(self, train_mode=True):
+        self.env_info = self.env.reset(train_mode=train_mode)[self.brain_name]
+        return self._state_scaler(self.env_info.vector_observations[0])
+
+    def step(self, action):
+        self.env_info = self.env.step(action)[self.brain_name]
+        next_state = self.env_info.vector_observations[0]
+        reward = self.env_info.rewards[0]  
+        done = self.env_info.local_done[0] 
+        return self._state_scaler(next_state), reward, done, "dummy"
+
+    def render(self):
+        return 
+
+    def close(self):
+        self.env.close()
+
+    def _state_scaler(self, state):
+        state_scaled = (state - self.state_min) / (self.state_max - self.state_min)
+        return state_scaled
 
 
 class SumTree(object):

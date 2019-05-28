@@ -25,3 +25,4 @@ class QNetworkTest(TestCase):
         state = torch.rand(10).reshape(1, -1)
         act = self.qnetwork(state)
         self.assertEqual(act.shape, torch.Size([1, self.action_size]))
+        
