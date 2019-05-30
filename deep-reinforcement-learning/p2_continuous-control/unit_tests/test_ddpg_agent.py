@@ -20,7 +20,10 @@ class AgentTest(TestCase):
     def test_act(self):
         state = np.random.random((100, self.state_size))
         act = self.agent.act(state, add_noise=True)
+        self.assertTrue(act.dtype, np.float32)
         self.assertEqual(act.shape, (100, self.action_size))
+
+
 
 class OUNoiseTest(TestCase):
 

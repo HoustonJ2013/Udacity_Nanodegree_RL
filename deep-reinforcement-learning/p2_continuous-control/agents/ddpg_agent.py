@@ -51,6 +51,7 @@ class Agent():
         self.seed = random.seed(random_seed)
         self.per = per
         self.device = device
+        self.running_loss = deque(maxlen=100)
 
         # Actor Network (w/ Target Network)
         self.actor_local = model.Actor(state_size, action_size, random_seed).to(self.device)
@@ -76,7 +77,11 @@ class Agent():
     def step(self, state, action, reward, next_state, done):
         """Save experience in replay memory, and use random sample from buffer to learn."""
         # Save experience / reward
-        self.memory.add(state, action, reward, next_state, done)
+        if len(state.shape) > 1:
+            for i in range(state.shape[0]):
+                self.memory.add(state[i], action[i], reward[i], next_state[i], done[i])
+        else:
+            self.memory.add(state, action, reward, next_state, done)
 
         # Learn, if enough samples are available in memory
         if len(self.memory) > self.batch_size:
@@ -134,6 +139,7 @@ class Agent():
         actor_loss.backward()
         self.actor_optimizer.step()
 
+        self.running_loss.append(critic_loss.item())
         # ----------------------- update target networks ----------------------- #
         self.soft_update(self.critic_local, self.critic_target, TAU)
         self.soft_update(self.actor_local, self.actor_target, TAU)                     

@@ -1,5 +1,6 @@
 from unityagents import UnityEnvironment
 import numpy as np
+import gym
 
 
 REACHER_STATES_MIN = np.array([ -4,  -4,  -4,  -1,  -1,  -1,  -1, -10,  -2,  -3, -14, -10, -13,
@@ -53,3 +54,9 @@ class UnityEnv_Reacher():
         ## state self.num_agents x self.state_size
         state_scaled = (state - self.state_min) / (self.state_max - self.state_min)
         return state_scaled
+
+
+
+
+
+    

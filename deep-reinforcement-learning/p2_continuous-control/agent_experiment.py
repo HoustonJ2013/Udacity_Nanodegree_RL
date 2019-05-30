@@ -28,8 +28,8 @@ def main(args):
         state_size = env.state_size
         action_size = env.action_size
 
-    elif args.env == "BipedalWalker-v2":
-        env = gym.make('BipedalWalker-v2') 
+    elif args.env == "Pendulum-v0":
+        env = gym.make('Pendulum-v0') 
         state_size = env.observation_space.shape[0]
         action_size = env.action_space.shape[0]
 
@@ -62,6 +62,7 @@ def main(args):
                     lr_actor=args.lr_actor,
                     lr_critic=args.lr_critic, 
                     per=use_prioritized_replay, 
+                    weight_decay=args.weight_decay,
                     device=device, 
                     loss=args.loss,
                     )
@@ -101,21 +102,20 @@ def main(args):
             state = next_state
             score += reward
             game_len += 1
-            if done:
+            if np.array(done).all():
                 break 
         game_length.append(game_len)
         scores_window.append(score)       # save most recent score
         scores.append(score)              # save most recent score
         eps = max(args.eps_end, args.eps_decay*eps) # decrease epsilon
-        print('\rEpisode {}\tAverage Score: {:.2f} current eps :{:.4f} Q Network Running Loss: {:.05f}'.format(i_episode, 
-                                                np.mean(scores_window), 
-                                                eps, 
+        print('\rEpisode {}\tAverage Score: {:.2f}  Q Network Running Loss: {:.05f}'.format(i_episode, 
+                                                np.mean(scores_window),  
                                                 np.mean(agent.running_loss)), end="")
         if i_episode % args.score_window_size == 0:
-            print('\rEpisode {}\tAverage Score: {:.2f} and Average game length {} current eps {:.04f} running_loss {}'\
-                .format(i_episode, np.mean(scores_window), np.mean(game_length), eps, np.mean(agent.running_loss)))
+            print('\rEpisode {}\tAverage Score: {:.2f} and Average game length {} running_loss {}'\
+                .format(i_episode, np.mean(scores_window), np.mean(game_length), np.mean(agent.running_loss)))
         if np.mean(scores_window)>=args.score_threshold or i_episode == n_episodes:
-            print('\nEnvironment solved in {:d} episodes!\tAverage Score: {:.2f} current eps :{:.4f}'.format(i_episode-100, np.mean(scores_window), eps))
+            print('\nEnvironment solved in {:d} episodes!\tAverage Score: {:.2f}'.format(i_episode-100, np.mean(scores_window)))
             check_point_name = args.env + "_episodes_" + str(i_episode) + "_score_" + str(np.mean(scores_window)) + now_string + \
                 "_" +  args.testname + "_checkpoint.pth"
             if args.agent == "ddpg":
@@ -136,21 +136,22 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     ## Agent related parameters
     parser.add_argument('--per', action="store_true", default=False)
-    parser.add_argument('--buffer_size', type=int, default=int(1e4))
-    parser.add_argument('--batch_size', type=int, default=64)
+    parser.add_argument('--buffer_size', type=int, default=int(1e5))
+    parser.add_argument('--batch_size', type=int, default=128)
     parser.add_argument('--gamma', type=float, default=0.99)
     parser.add_argument('--tau', type=float, default=1e-3)
     parser.add_argument('--lr', type=float, default=5e-4)
     parser.add_argument('--lr_actor', type=float, default=1e-4)
     parser.add_argument('--lr_critic', type=float, default=3e-4)
+    parser.add_argument('--weight_decay', type=float, default=1e-4)
     parser.add_argument('--update_every', type=int, default=4)
     parser.add_argument('--score_threshold', type=int, default=200)
     parser.add_argument('--score_window_size', type=int, default=100)
 
     ## Environment related parameters
-    parser.add_argument('--env', type=str, default="BipedalWalker-v2")
+    parser.add_argument('--env', type=str, default="Pendulum-v0")
     parser.add_argument('--agent', type=str, default="ddpg")
-    parser.add_argument('--num_episodes', type=int, default=2000,
+    parser.add_argument('--num_episodes', type=int, default=1000,
                         help='no. of epoches to train the model')
     parser.add_argument('--eps_start', type=float, default=1.0)
     parser.add_argument('--eps_end', type=float, default=0.01)
