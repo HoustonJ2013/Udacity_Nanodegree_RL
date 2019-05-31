@@ -7,6 +7,7 @@ from . import model, replay_buffers
 import torch
 import torch.nn.functional as F
 import torch.optim as optim
+from copy import deepcopy
 
 BUFFER_SIZE = int(1e6)  # replay buffer size
 BATCH_SIZE = 128        # minibatch size
@@ -15,6 +16,8 @@ TAU = 1e-3              # for soft update of target parameters
 LR_ACTOR = 1e-4         # learning rate of the actor 
 LR_CRITIC = 3e-4        # learning rate of the critic
 WEIGHT_DECAY = 0.0001   # L2 weight decay
+N_EPISODE_BF_TRAIN = 100
+UPDATE_EVERY = 4        # how often to update the network
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -29,7 +32,9 @@ class Agent():
                 tau=TAU,
                 lr_actor = LR_ACTOR,
                 lr_critic = LR_CRITIC,
+                update_every=UPDATE_EVERY, 
                 weight_decay = WEIGHT_DECAY, 
+                n_episode_bf_train=N_EPISODE_BF_TRAIN, 
                 per=False, # Prioritized experience replay
                 loss="mse",):
         """Initialize an Agent object.
@@ -51,16 +56,31 @@ class Agent():
         self.seed = random.seed(random_seed)
         self.per = per
         self.device = device
-        self.running_loss = deque(maxlen=100)
+        self.critic_running_loss = deque(maxlen=100)
+        self.actor_running_loss = deque(maxlen=100)
+        self.n_episode = 0
+        self.n_episode_bf_train = n_episode_bf_train
+        self.update_every = update_every
 
         # Actor Network (w/ Target Network)
         self.actor_local = model.Actor(state_size, action_size, random_seed).to(self.device)
         self.actor_target = model.Actor(state_size, action_size, random_seed).to(self.device)
+
+        ## Check if local and target start with same weights
+        for target_param, local_param in zip(self.actor_local.parameters(), self.actor_target.parameters()):
+            assert (target_param.data == local_param.data).all()
+        print("Actor weights initialized the same between local and target")
+        
         self.actor_optimizer = optim.Adam(self.actor_local.parameters(), lr=self.lr_actor)
 
         # Critic Network (w/ Target Network)
         self.critic_local = model.Critic(state_size, action_size, random_seed).to(self.device)
         self.critic_target = model.Critic(state_size, action_size, random_seed).to(self.device)
+        ## Check if local and target start with same weights
+        for target_param, local_param in zip(self.critic_local.parameters(), self.critic_target.parameters()):
+            assert (target_param.data == local_param.data).all()
+        print("Critic weights initialized the same between local and target")
+
         self.critic_optimizer = optim.Adam(self.critic_local.parameters(), lr=self.lr_critic, weight_decay=weight_decay)
 
         # Noise process
@@ -74,6 +94,8 @@ class Agent():
             self.memory = replay_buffers.ReplayBuffer(action_size, buffer_size, batch_size, random_seed, device)
             print("ReplayBuffer is instantiated")
     
+        self.t_step = 0
+
     def step(self, state, action, reward, next_state, done):
         """Save experience in replay memory, and use random sample from buffer to learn."""
         # Save experience / reward
@@ -84,7 +106,8 @@ class Agent():
             self.memory.add(state, action, reward, next_state, done)
 
         # Learn, if enough samples are available in memory
-        if len(self.memory) > self.batch_size:
+        self.t_step = (self.t_step + 1) % self.update_every
+        if self.n_episode > self.n_episode_bf_train and self.t_step  == 0:
             experiences = self.memory.sample()
             self.learn(experiences, self.gamma)
 
@@ -139,10 +162,11 @@ class Agent():
         actor_loss.backward()
         self.actor_optimizer.step()
 
-        self.running_loss.append(critic_loss.item())
+        self.critic_running_loss.append(critic_loss.item())
+        self.actor_running_loss.append(actor_loss.item())
         # ----------------------- update target networks ----------------------- #
-        self.soft_update(self.critic_local, self.critic_target, TAU)
-        self.soft_update(self.actor_local, self.actor_target, TAU)                     
+        self.soft_update(self.critic_local, self.critic_target, self.tau)
+        self.soft_update(self.actor_local, self.actor_target, self.tau)                     
 
     def soft_update(self, local_model, target_model, tau):
         """Soft update model parameters.
