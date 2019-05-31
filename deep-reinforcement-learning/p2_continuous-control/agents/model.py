@@ -38,6 +38,9 @@ class Actor(nn.Module):
         """Build an actor (policy) network that maps states -> actions."""
         x = F.relu(self.fc1(state))
         return F.tanh(self.fc2(x))
+    
+    def __call__(self, state):
+        return self.forward(state)
 
 
 class Critic(nn.Module):
@@ -76,6 +79,9 @@ class Critic(nn.Module):
         x = F.leaky_relu(self.fc3(x))
         return self.fc4(x)
 
+    def __call__(self, state, action):
+        return self.forward(state, action)
+
 
 class QNetwork(nn.Module):
     """Actor (Policy) Model."""
@@ -102,6 +108,7 @@ class QNetwork(nn.Module):
         """Build a network that maps state -> action values."""
         if self.model_name == "linear_model_2":
             return self._linearmodel2(state)
+
 
     def _linearmodel2(self, state):
         x = F.relu(self.linear1(state))

@@ -65,6 +65,7 @@ class Agent():
         self.tau = tau
         self.lr = lr
         self.update_every = update_every
+        self.n_episode = 0
         # Replay memory
         if self.per: 
             self.memory = PrioritizedReplayBuffer(action_size, buffer_size, batch_size, seed, device)
