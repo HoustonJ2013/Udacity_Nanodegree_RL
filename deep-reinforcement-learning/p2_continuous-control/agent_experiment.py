@@ -160,7 +160,7 @@ if __name__ == "__main__":
     parser.add_argument('--per', action="store_true", default=False)
     parser.add_argument('--save_replay', action="store_true", default=False)
     parser.add_argument('--buffer_size', type=int, default=int(1e5))
-    parser.add_argument('--batch_size', type=int, default=128)
+    parser.add_argument('--batch_size', type=int, default=64)
     parser.add_argument('--gamma', type=float, default=0.99)
     parser.add_argument('--tau', type=float, default=1e-3)
     parser.add_argument('--lr', type=float, default=5e-4)
