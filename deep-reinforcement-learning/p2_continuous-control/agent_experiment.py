@@ -19,17 +19,30 @@ def main(args):
 
     ## Support two environment, LunarLander was used to debug 
     if args.env == "Reacher_unity":
+        model_param = {"actor_fc_units": 64, 
+                    "critic_fc_units1": 32, 
+                    "critic_fc_units2": 64, 
+                    "critic_fc_units3": 64}
         env = UnityEnv_Reacher(env_file="Reacher_Linux/Reacher.x86_64")
         state_size = env.state_size
         action_size = env.action_size
 
     elif args.env == "Reacher_unity_v2":
+        model_param = {"actor_fc_units": 64, 
+                    "critic_fc_units1": 32, 
+                    "critic_fc_units2": 64, 
+                    "critic_fc_units3": 64}
         env = UnityEnv_Reacher(env_file="Reacher_Linux_20/Reacher.x86_64")
         state_size = env.state_size
         action_size = env.action_size
 
-    elif args.env == "Pendulum-v0":
-        env = gym.make('Pendulum-v0') 
+    elif args.env == "MountainCarContinuous-v0":  ## LunarLanderContinuous-v2
+        model_param = {"actor_fc_units": 10, 
+                    "critic_fc_units1": 2, 
+                    "critic_fc_units2": 10, 
+                    "critic_fc_units3": 10}
+
+        env = gym.make('MountainCarContinuous-v0') 
         state_size = env.observation_space.shape[0]
         action_size = env.action_space.shape[0]
 
@@ -40,6 +53,9 @@ def main(args):
     print("action size is %i"%(action_size))
     print("A typical state looks like", env.reset())
 
+
+    ## 
+    print("Test parameters", args)
     ## device for training
     if args.device.lower() == "cpu".lower():
         device = torch.device("cpu")
@@ -63,7 +79,8 @@ def main(args):
                     lr_critic=args.lr_critic, 
                     per=use_prioritized_replay, 
                     weight_decay=args.weight_decay,
-                    n_episode_bf_train=100, ## Train start after n_episode 
+                    model_param=model_param, 
+                    n_episode_bf_train=args.n_episode_bf_train, ## Train start after n_episode 
                     device=device, 
                     loss=args.loss,
                     )
@@ -159,27 +176,28 @@ if __name__ == "__main__":
     ## Agent related parameters
     parser.add_argument('--per', action="store_true", default=False)
     parser.add_argument('--save_replay', action="store_true", default=False)
-    parser.add_argument('--buffer_size', type=int, default=int(1e5))
+    parser.add_argument('--buffer_size', type=int, default=int(1e4))
+    parser.add_argument('--n_episode_bf_train', type=int, default=0)
     parser.add_argument('--batch_size', type=int, default=128)
     parser.add_argument('--gamma', type=float, default=0.99)
     parser.add_argument('--tau', type=float, default=1e-3)
     parser.add_argument('--lr', type=float, default=5e-4)
     parser.add_argument('--lr_actor', type=float, default=1e-4)
     parser.add_argument('--lr_critic', type=float, default=3e-4)
-    parser.add_argument('--weight_decay', type=float, default=1e-4)
-    parser.add_argument('--update_every', type=int, default=4)
+    parser.add_argument('--weight_decay', type=float, default=0)
+    parser.add_argument('--update_every', type=int, default=1)
     parser.add_argument('--score_threshold', type=int, default=200)
     parser.add_argument('--score_window_size', type=int, default=100)
 
     ## Environment related parameters
-    parser.add_argument('--env', type=str, default="Reacher_unity")
+    parser.add_argument('--env', type=str, default="MountainCarContinuous-v0")
     parser.add_argument('--agent', type=str, default="ddpg")
     parser.add_argument('--num_episodes', type=int, default=1000,
                         help='no. of epoches to train the model')
     parser.add_argument('--eps_start', type=float, default=1.0)
     parser.add_argument('--eps_end', type=float, default=0.01)
     parser.add_argument('--eps_decay', type=float, default=0.999)
-    parser.add_argument('--max_t', type=int, default=300)
+    parser.add_argument('--max_t', type=int, default=2000)
     parser.add_argument('--loss', type=str, default="mse")
 
     parser.add_argument('--workers', type=int, default=8)

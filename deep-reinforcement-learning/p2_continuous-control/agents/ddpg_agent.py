@@ -24,7 +24,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 class Agent():
     """Interacts with and learns from the environment."""
     
-    def __init__(self, state_size, action_size, random_seed=42, 
+    def __init__(self, state_size, action_size, model_param, random_seed=42, 
                 device=torch.device("cpu"), ## torch.device("cuda:0") or torch.device("cpu")
                 buffer_size=BUFFER_SIZE, 
                 batch_size=BATCH_SIZE,
@@ -63,8 +63,8 @@ class Agent():
         self.update_every = update_every
 
         # Actor Network (w/ Target Network)
-        self.actor_local = model.Actor(state_size, action_size, random_seed).to(self.device)
-        self.actor_target = model.Actor(state_size, action_size, random_seed).to(self.device)
+        self.actor_local = model.Actor(state_size, action_size, random_seed, fc_units=model_param["actor_fc_units"]).to(self.device)
+        self.actor_target = model.Actor(state_size, action_size, random_seed, fc_units=model_param["actor_fc_units"]).to(self.device)
 
         ## Check if local and target start with same weights
         for target_param, local_param in zip(self.actor_local.parameters(), self.actor_target.parameters()):
@@ -74,8 +74,10 @@ class Agent():
         self.actor_optimizer = optim.Adam(self.actor_local.parameters(), lr=self.lr_actor)
 
         # Critic Network (w/ Target Network)
-        self.critic_local = model.Critic(state_size, action_size, random_seed).to(self.device)
-        self.critic_target = model.Critic(state_size, action_size, random_seed).to(self.device)
+        self.critic_local = model.Critic(state_size, action_size, random_seed, fcs1_units=model_param["critic_fc_units1"], 
+                                            fc2_units=model_param["critic_fc_units2"], fc3_units=model_param["critic_fc_units3"]).to(self.device)
+        self.critic_target = model.Critic(state_size, action_size, random_seed, fcs1_units=model_param["critic_fc_units1"], 
+                                            fc2_units=model_param["critic_fc_units2"], fc3_units=model_param["critic_fc_units3"]).to(self.device)
         ## Check if local and target start with same weights
         for target_param, local_param in zip(self.critic_local.parameters(), self.critic_target.parameters()):
             assert (target_param.data == local_param.data).all()
@@ -107,7 +109,7 @@ class Agent():
 
         # Learn, if enough samples are available in memory
         self.t_step = (self.t_step + 1) % self.update_every
-        if self.n_episode > self.n_episode_bf_train and self.t_step  == 0:
+        if self.n_episode > self.n_episode_bf_train and self.t_step  == 0 and len(self.memory) > self.batch_size:
             experiences = self.memory.sample()
             self.learn(experiences, self.gamma)
 
