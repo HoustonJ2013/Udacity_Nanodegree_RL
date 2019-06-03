@@ -9,6 +9,9 @@ REACHER_STATES_MIN = np.array([ -4,  -4,  -4,  -1,  -1,  -1,  -1, -10,  -2,  -3,
 REACHER_STATES_MAX = np.array([4,  4,  4,  1,  1,  1,  1, 10,  2,  3, 14, 10, 13,  9, 10,  9,  1,
         1,  1,  1, 11, 10,  6, 19, 20, 18,  8,  1,  8,  1,  1,  1,  1])
 
+MOUNTAINCAR_MIN = np.array([-1.2, -0.07])
+MOUNTAINCAR_MAX = np.array([0.6, 0.07])
+
 class UnityEnv_Reacher():
     '''
     Simply the syntax for Unity environment, make it similar to gym
@@ -56,6 +59,28 @@ class UnityEnv_Reacher():
         return state_scaled
 
 
+class Vgym:
+    ## A wrapper for gym environment that change the shape of states, rewards, and actions to match the PPO agent
+    def __init__(self, env_name):
+        self.env = gym.make(env_name) 
+        self.state_min = MOUNTAINCAR_MIN
+        self.state_max = MOUNTAINCAR_MAX
+
+    def reset(self):
+        return self._state_scaler(self.env.reset().reshape(1, -1))
+
+    def render(self):
+        self.env.render()
+    
+    def step(self, action):
+        next_state, reward, done, _ = self.env.step(action[0])
+        next_state = self._state_scaler(next_state)
+        return next_state.reshape(1, -1), np.array([reward]), np.array([done]), np.array([_])
+
+    def _state_scaler(self, state):
+        ## state self.num_agents x self.state_size
+        state_scaled = (state - self.state_min) / (self.state_max - self.state_min)
+        return state_scaled
 
     
 

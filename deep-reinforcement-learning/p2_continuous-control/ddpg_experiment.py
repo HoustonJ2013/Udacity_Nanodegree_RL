@@ -84,20 +84,6 @@ def main(args):
                     device=device, 
                     loss=args.loss,
                     )
-    elif args.agent == "dqn":
-        agent = DQN_Agent(state_size=state_size, 
-                  action_size=action_size, 
-                  seed=42,
-                  buffer_size=args.buffer_size,
-                  batch_size=args.batch_size,
-                  gamma=args.gamma,
-                  tau=args.tau, 
-                  lr=args.lr,
-                  update_every=args.update_every,
-                  per=use_prioritized_replay, 
-                  device=device, 
-                  loss=args.loss,
-                 )
 
     ## Train the agent
     n_episodes = args.num_episodes
@@ -191,7 +177,7 @@ if __name__ == "__main__":
 
     ## Environment related parameters
     parser.add_argument('--env', type=str, default="MountainCarContinuous-v0")
-    parser.add_argument('--agent', type=str, default="ddpg")
+    # parser.add_argument('--agent', type=str, default="ddpg")
     parser.add_argument('--num_episodes', type=int, default=1000,
                         help='no. of epoches to train the model')
     parser.add_argument('--eps_start', type=float, default=1.0)

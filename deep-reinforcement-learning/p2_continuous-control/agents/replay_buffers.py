@@ -23,7 +23,11 @@ class ReplayBuffer:
         """
         self.action_size = action_size
         self.batch_size = batch_size
-        self.memory = deque(maxlen=buffer_size)  
+        self.buffer_size = buffer_size
+        if self.buffer_size is None:
+            self.memory = []
+        else:
+            self.memory = deque(maxlen=buffer_size)  
         self.experience = namedtuple("Experience", field_names=["state", "action", "reward", "next_state", "done"])
         self.device = device
         random.seed(seed)
@@ -33,9 +37,12 @@ class ReplayBuffer:
         e = self.experience(state, action, reward, next_state, done)
         self.memory.append(e)
     
-    def sample(self):
+    def sample(self, batch_size=None):
         """Randomly sample a batch of experiences from memory."""
-        experiences = random.sample(self.memory, k=self.batch_size)
+
+        if batch_size is None:
+            batch_size = self.batch_size
+        experiences = random.sample(self.memory, k=batch_size)
 
         states = torch.from_numpy(np.vstack([e.state for e in experiences if e is not None])).float().to(self.device)
         actions = torch.from_numpy(np.vstack([e.action for e in experiences if e is not None])).float().to(self.device)
@@ -44,6 +51,12 @@ class ReplayBuffer:
         dones = torch.from_numpy(np.vstack([e.done for e in experiences if e is not None]).astype(np.uint8)).float().to(self.device)
   
         return (states, actions, rewards, next_states, dones)
+    
+    def reset(self):
+        if self.buffer_size is None:
+            self.memory = []
+        else:
+            self.memory = deque(maxlen=self.buffer_size)  
 
     def __len__(self):
         """Return the current size of internal memory."""

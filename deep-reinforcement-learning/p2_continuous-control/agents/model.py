@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
+import torch.distributions as tdist
 
 
 def hidden_init(layer):
@@ -14,7 +15,7 @@ class Actor(nn.Module):
     """Actor (Policy) Model."""
     ## Input states, output actions 
 
-    def __init__(self, state_size, action_size, seed, fc_units=256):
+    def __init__(self, state_size, action_size, seed, output_activation=None, fc_units=256):
         """Initialize parameters and build model.
         Params
         ======
@@ -28,6 +29,7 @@ class Actor(nn.Module):
         self.seed = torch.manual_seed(seed)
         self.fc1 = nn.Linear(state_size, fc_units)
         self.fc2 = nn.Linear(fc_units, action_size)
+        self.output_activation = output_activation
         self.reset_parameters()
 
     def reset_parameters(self):
@@ -39,6 +41,47 @@ class Actor(nn.Module):
         x = F.relu(self.fc1(state))
         return F.tanh(self.fc2(x))
     
+    def __call__(self, state):
+        return self.forward(state)
+
+
+class ActorStochastic(nn.Module):
+    """Actor (Policy) Model."""
+    ## Input states, output actions 
+
+    def __init__(self, state_size, action_size, seed, fc_units=256, std=0.3):
+        """Initialize parameters and build model.
+        Params
+        ======
+            state_size (int): Dimension of each state
+            action_size (int): Dimension of each action
+            seed (int): Random seed
+            fc1_units (int): Number of nodes in first hidden layer
+            fc2_units (int): Number of nodes in second hidden layer
+        Add a stochastic policy element. Assuming the final output is sampled from a normal distribution with std provided
+        """
+        super(ActorStochastic, self).__init__()
+        self.seed = torch.manual_seed(seed)
+        self.fc1 = nn.Linear(state_size, fc_units)
+        self.fc2 = nn.Linear(fc_units, action_size)
+        self.reset_parameters()
+        self.dist = tdist.Normal
+        self.std = std
+
+    def reset_parameters(self):
+        self.fc1.weight.data.uniform_(*hidden_init(self.fc1))
+        self.fc2.weight.data.uniform_(-3e-3, 3e-3)
+
+    def forward(self, state):
+        """Build an actor (policy) network that maps states -> actions."""
+        x = F.relu(self.fc1(state))
+        x = F.tanh(self.fc2(x))
+        x_dist = self.dist(x, self.std)
+        actions = x_dist.sample()
+        log_prob = x_dist.log_prob(actions)
+        log_prob = torch.sum(log_prob, dim=1, keepdim=True)
+        return actions, log_prob
+
     def __call__(self, state):
         return self.forward(state)
 
