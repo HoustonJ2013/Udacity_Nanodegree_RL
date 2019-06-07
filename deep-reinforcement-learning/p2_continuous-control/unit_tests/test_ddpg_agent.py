@@ -3,6 +3,10 @@ import numpy as np
 from agents.ddpg_agent import Agent, OUNoise
 import torch
 
+model_param = {"actor_fc_units": 10, 
+                    "critic_fc_units1": 2, 
+                    "critic_fc_units2": 10, 
+                    "critic_fc_units3": 10}
 
 class AgentTest(TestCase):
 
@@ -14,6 +18,7 @@ class AgentTest(TestCase):
         self.agent = Agent(state_size=self.state_size, 
                            action_size=self.action_size, 
                            batch_size=self.batch_size,
+                           model_param=model_param, 
                            random_seed=seed, 
                            device=torch.device("cpu"))
 

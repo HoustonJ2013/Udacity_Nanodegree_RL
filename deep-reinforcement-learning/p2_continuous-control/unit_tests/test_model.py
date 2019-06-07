@@ -1,5 +1,5 @@
 from unittest import TestCase
-from agents.model import QNetwork, Actor, Critic
+from agents.model import QNetwork, Actor, Critic, ActorStochastic
 import torch
 import numpy as np
 
@@ -62,3 +62,24 @@ class CriticTest(TestCase):
         actions = torch.rand((100, self.action_size))
         output = self.critic.forward(states, actions).data.numpy()
         self.assertEqual(output.shape, (100, 1))
+
+
+class ActorStochasticTest(TestCase):
+
+    def setUp(self):
+        self.state_size = 10
+        self.action_size = 4
+        seed = 40
+        self.actor = ActorStochastic(state_size=self.state_size, 
+                                 action_size=self.action_size, 
+                                 std=0.4, 
+                                 seed=seed)
+
+    def test_forward(self):
+        state = torch.rand((100, self.state_size))
+        action, log_prob = self.actor.forward(state)
+        self.assertEqual(log_prob.shape, (100, 1))
+        self.assertEqual(action.dtype, torch.float32)
+        self.assertEqual(action.shape, (100, self.action_size))
+        self.assertTrue(np.min(action.data.numpy()) >= -2)
+        self.assertTrue(np.max(action.data.numpy()) <= 2)
