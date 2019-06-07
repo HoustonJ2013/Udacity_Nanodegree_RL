@@ -19,10 +19,10 @@ def main(args):
 
     ## Support two environment, LunarLander was used to debug 
     if args.env == "Reacher_unity":
-        model_param = {"actor_fc_units": 64, 
-                    "critic_fc_units1": 32, 
-                    "critic_fc_units2": 64, 
-                    "critic_fc_units3": 64}
+        model_param = {"actor_fc_units": 16, 
+                    "critic_fc_units1": 10, 
+                    "critic_fc_units2": 32, 
+                    "critic_fc_units3": 16}
         env = UnityEnv_Reacher(env_file="Reacher_Linux/Reacher.x86_64")
         state_size = env.state_size
         action_size = env.action_size
