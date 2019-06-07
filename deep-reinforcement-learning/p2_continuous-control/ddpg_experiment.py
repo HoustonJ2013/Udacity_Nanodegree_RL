@@ -5,7 +5,6 @@ from collections import namedtuple, deque
 from unityagents import UnityEnvironment
 import gym
 from agents.ddpg_agent import Agent as DDPG_Agent
-from agents.dqn_agent import Agent as DQN_Agent
 
 from agents.Unity_Env import UnityEnv_Reacher
 from agents.replay_buffers import ReplayBuffer, PrioritizedReplayBuffer
@@ -48,7 +47,6 @@ def main(args):
 
     ## Enviornment description 
     print("Current environment is ", args.env)
-    print("Selecte agent to solve the env is", args.agent)
     print("State size is %i"%(state_size))
     print("action size is %i"%(action_size))
     print("A typical state looks like", env.reset())
@@ -67,23 +65,23 @@ def main(args):
     if args.per:
         print("Using Prioritized Replay")
 
-    if args.agent == "ddpg":
-        agent = DDPG_Agent(state_size=state_size, 
-                    action_size=action_size, 
-                    random_seed=42,
-                    buffer_size=args.buffer_size,
-                    batch_size=args.batch_size,
-                    gamma=args.gamma,
-                    tau=args.tau, 
-                    lr_actor=args.lr_actor,
-                    lr_critic=args.lr_critic, 
-                    per=use_prioritized_replay, 
-                    weight_decay=args.weight_decay,
-                    model_param=model_param, 
-                    n_episode_bf_train=args.n_episode_bf_train, ## Train start after n_episode 
-                    device=device, 
-                    loss=args.loss,
-                    )
+    
+    agent = DDPG_Agent(state_size=state_size, 
+                action_size=action_size, 
+                random_seed=42,
+                buffer_size=args.buffer_size,
+                batch_size=args.batch_size,
+                gamma=args.gamma,
+                tau=args.tau, 
+                lr_actor=args.lr_actor,
+                lr_critic=args.lr_critic, 
+                per=use_prioritized_replay, 
+                weight_decay=args.weight_decay,
+                model_param=model_param, 
+                n_episode_bf_train=args.n_episode_bf_train, ## Train start after n_episode 
+                device=device, 
+                loss=args.loss,
+                )
 
     ## Train the agent
     n_episodes = args.num_episodes
@@ -113,25 +111,16 @@ def main(args):
         scores_window.append(score)       # save most recent score
         scores.append(score)              # save most recent score
         eps = max(args.eps_end, args.eps_decay*eps) # decrease epsilon
-        if args.agent == "dqn":
-            print('\rEpisode {}\t Average Score: {:.2f}  \t Game length {} Q Network Running Loss: {:.05f}'.format(i_episode, 
-                                                    np.mean(scores_window),  
-                                                    game_len,
-                                                    np.mean(agent.running_loss)), end="")
-        elif args.agent == "ddpg":
-            print('\rEpisode {}\t Average Score: {:.2f}  \t Game length {} Critic Running Loss: {:.05f} Actor Running Loss: {:.05f}'.format(i_episode, 
-                                                    np.mean(scores_window),  
-                                                    game_len, 
-                                                    np.mean(agent.critic_running_loss), 
-                                                    np.mean(agent.actor_running_loss)), end="")
+        
+        print('\rEpisode {}\t Average Score: {:.2f}  \t Game length {} Critic Running Loss: {:.05f} Actor Running Loss: {:.05f}'.format(i_episode, 
+                                                np.mean(scores_window),  
+                                                game_len, 
+                                                np.mean(agent.critic_running_loss), 
+                                                np.mean(agent.actor_running_loss)), end="")
         if i_episode % args.score_window_size == 0:
-            if args.agent == "dqn":
-                print('\rEpisode {}\tAverage Score: {:.2f} and Average game length {} running_loss {}'\
-                    .format(i_episode, np.mean(scores_window), np.mean(game_length), np.mean(agent.running_loss)))
-            elif args.agent == "ddpg":
-                print('\rEpisode {}\tAverage Score: {:.2f} and Average game length {} critic running_loss {} actor running_loss {}'\
-                    .format(i_episode, np.mean(scores_window), np.mean(game_length), np.mean(agent.critic_running_loss), 
-                    np.mean(agent.actor_running_loss)))
+            print('\rEpisode {}\tAverage Score: {:.2f} and Average game length {} critic running_loss {} actor running_loss {}'\
+                .format(i_episode, np.mean(scores_window), np.mean(game_length), np.mean(agent.critic_running_loss), 
+                np.mean(agent.actor_running_loss)))
         if np.mean(scores_window)>=args.score_threshold or i_episode == n_episodes:
             print('\nEnvironment solved in {:d} episodes!\tAverage Score: {:.2f}'.format(i_episode-100, np.mean(scores_window)))
             check_point_name = args.env + "_episodes_" + str(i_episode) + "_score_" + str(np.mean(scores_window)) + now_string + \
@@ -143,11 +132,10 @@ def main(args):
                 with open("models/" + replay_buffer_name, "wb") as pickle_file:
                     pickle.dump(replay_buffer, pickle_file)
                 
-            if args.agent == "ddpg":
-                torch.save(agent.actor_local.state_dict(), "models/actor_" + check_point_name)
-                torch.save(agent.critic_local.state_dict(), "models/critic_" + check_point_name)
-            elif args.agent == "dqn":
-                torch.save(agent.qnetwork_local.state_dict(), "models/" + check_point_name)
+            
+            torch.save(agent.actor_local.state_dict(), "models/actor_" + check_point_name)
+            torch.save(agent.critic_local.state_dict(), "models/critic_" + check_point_name)
+            
             print("saving models ...")
     
     score_name = args.env + "_episodes_" + str(i_episode) + "_score_" + str(np.mean(scores_window)) + now_string + "_" +  args.testname +  "_scores"
