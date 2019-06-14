@@ -20,12 +20,13 @@
     python ddpg_experiment.py  -h 
     ```
 ## Results: 
-|  Reacher V1 Score vs Num of episodes   
-:---------------:|:--------------:
+Reacher V1 Score vs Num of episodes   
+
 <<img src="pics/Reacher_ddpg_scores.png" width=360  alt="Banana" ALIGN="Middle">
 
-The actor critical weights are as follows, 
 
+
+The actor critical weights are as follows, 
 
 actor: models/actor_iter2400_Reacher_unity_v1_episodes_2400_score_15.0070996645651762019_06_11_15_18_17__checkpoint.pth
 
