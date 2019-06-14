@@ -59,10 +59,11 @@ For this project, we will provide you with two separate versions of the Unity en
 The second version is useful for algorithms like [PPO](https://arxiv.org/pdf/1707.06347.pdf), [A3C](https://arxiv.org/pdf/1602.01783.pdf), and [D4PG](https://openreview.net/pdf?id=SyZipzbCb) that use multiple (non-interacting, parallel) copies of the same agent to distribute the task of gathering experience.  
 
 # 3. Project Folder Stuctures
-- Banana_Linux/   Banana environment for linux
-- dqn/ source code for DQN agent, replay buffers and nn models
+- Reacher_Linux/   Reacher environment for linux
+- agents/ source codes for two agents, DDPG and PPO. The submitted solution was solved by DDPG
 - models/ scores log and solved nn models
-- notebook/ analysis notebooks for environment and results 
+- notebook/ analysis notebooks for environment and results
+- logs/ training logs for model and hyper parameter tests 
 - vidoes/ gif for display
 
 # 4. Run Test
@@ -74,13 +75,10 @@ python -m unittest discover unit_tests -v
 
 ## To experiment with different parameters and environment
 ```
-python agent_experiment.py --device gpu --env Banana_unity ## Ordinary replaybuffer
+python ddpg_experiment.py --device gpu 
 
-python agent_experiment.py --device gpu --per --env Banana_unity ## Prioritized Replay Buffer
-
-python agent_experiment.py --device gpu --env Banana_unity --max_t 1000 --batch_size 64 --num_episodes 200 --score_threshold 13 --score_window_size 5 --update_every 10 --eps_decay 0.99 ## Final parameters for the submission
 ```
 
 ## Test Notes: 
-We tested the implemented algorithm with mountaincarcontinuous-v0, and found it is hard to solve the problem with current implementaion either in PPO or DDPG. Because the mountaincar problem has very sparse a final large reward, and the current implementation of reply buffer is not very efficient at learning it. Most of the time the agent spend is to learn the boring experiences. 
+The model architecture is the critial to solve this reacher environment. 
 
