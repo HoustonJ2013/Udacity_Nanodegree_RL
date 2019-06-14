@@ -18,6 +18,8 @@ LR_CRITIC = 3e-4        # learning rate of the critic
 WEIGHT_DECAY = 0.0001   # L2 weight decay
 N_EPISODE_BF_TRAIN = 100
 UPDATE_EVERY = 4        # how often to update the network
+N_EPISODE_STOP_EXPLORE = 500
+MAX_T = 1000
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -35,6 +37,8 @@ class Agent():
                 update_every=UPDATE_EVERY, 
                 weight_decay = WEIGHT_DECAY, 
                 n_episode_bf_train=N_EPISODE_BF_TRAIN, 
+                n_episode_stop_explore=N_EPISODE_STOP_EXPLORE,
+                max_t=MAX_T, 
                 per=False, # Prioritized experience replay
                 loss="mse",):
         """Initialize an Agent object.
@@ -56,10 +60,11 @@ class Agent():
         self.seed = random.seed(random_seed)
         self.per = per
         self.device = device
-        self.critic_running_loss = deque(maxlen=100)
-        self.actor_running_loss = deque(maxlen=100)
+        self.critic_running_loss = deque(maxlen=100 * max_t)
+        self.actor_running_loss = deque(maxlen=100 * max_t)
         self.n_episode = 0
         self.n_episode_bf_train = n_episode_bf_train
+        self.n_episode_stop_explore = n_episode_stop_explore
         self.update_every = update_every
 
         # Actor Network (w/ Target Network)
@@ -110,24 +115,25 @@ class Agent():
         # Learn, if enough samples are available in memory
         self.t_step = (self.t_step + 1) % self.update_every
         if self.n_episode > self.n_episode_bf_train and self.t_step  == 0 and len(self.memory) > self.batch_size:
-            experiences = self.memory.sample()
-            self.learn(experiences, self.gamma)
+            self.learn(self.gamma)
 
-    def act(self, state, add_noise=True):
+    def act(self, state, add_noise=True, clip=1):
         """Returns actions for given state as per current policy."""
         state = torch.from_numpy(state).float().to(self.device)
         self.actor_local.eval()
         with torch.no_grad():
             action = self.actor_local(state).cpu().data.numpy()
         self.actor_local.train()
-        if add_noise:
+        if add_noise and self.n_episode < self.n_episode_stop_explore:
             action += self.noise.sample()
-        return np.clip(action, -1, 1)
+            return np.clip(action, -clip, clip)
+        else:
+            return np.clip(action, -clip, clip)
 
     def reset(self):
         self.noise.reset()
 
-    def learn(self, experiences, gamma):
+    def learn(self, gamma):
         """Update policy and value parameters using given batch of experience tuples.
         Q_targets = r + γ * critic_target(next_state, actor_target(next_state))
         where:
@@ -136,10 +142,13 @@ class Agent():
 
         Params
         ======
-            experiences (Tuple[torch.Tensor]): tuple of (s, a, r, s', done) tuples 
             gamma (float): discount factor
         """
-        states, actions, rewards, next_states, dones = experiences
+        if self.per:
+            tree_idx, batch_memory, ISWeights = self.memory.sample()
+            states, actions, rewards, next_states, dones = batch_memory
+        else: 
+            states, actions, rewards, next_states, dones = self.memory.sample()
 
         # ---------------------------- update critic ---------------------------- #
         # Get predicted next-state actions and Q values from target models
@@ -149,7 +158,15 @@ class Agent():
         Q_targets = rewards + (gamma * Q_targets_next * (1 - dones))
         # Compute critic loss
         Q_expected = self.critic_local(states, actions)
-        critic_loss = F.mse_loss(Q_expected, Q_targets)
+
+        if self.per: 
+            abs_error = self._abs_error(Q_expected, Q_targets).to(torch.device("cpu")).data.numpy()
+            critic_loss = F.mse_loss(Q_expected, Q_targets)
+            self.memory.batch_update(tree_idx, abs_error)
+            assert np.sum(abs_error) != 0
+        else:
+            critic_loss = F.mse_loss(Q_expected, Q_targets)
+
         # Minimize the loss
         self.critic_optimizer.zero_grad()
         critic_loss.backward()
@@ -169,6 +186,13 @@ class Agent():
         # ----------------------- update target networks ----------------------- #
         self.soft_update(self.critic_local, self.critic_target, self.tau)
         self.soft_update(self.actor_local, self.actor_target, self.tau)                     
+
+    def _abs_error(self, qnet, target):
+        # qnet target have shape shape batch size x 1,
+        return torch.mean(torch.abs(qnet - target), 1) 
+    
+    def _weighted_mse_loss(self, qnet, target, weights):
+        return torch.mean(weights * (qnet - target)**2 )
 
     def soft_update(self, local_model, target_model, tau):
         """Soft update model parameters.

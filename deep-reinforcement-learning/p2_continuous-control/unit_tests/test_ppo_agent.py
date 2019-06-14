@@ -36,6 +36,12 @@ class AgentTest(TestCase):
         act2_b = self.agent._stochastic_act(state, 0.2)
         self.assertTrue(not (act2==act2_b).all())
 
+        act2 = self.agent._stochastic_act(state, action_std=0.01)
+        self.assertTrue(act2.dtype, np.float32)
+        self.assertEqual(act2.shape, (100, self.action_size))
+        act2_b = self.agent._stochastic_act(state, 0.01)
+        self.assertTrue(not (act2==act2_b).all())
+
     def test_discount_reward(self):
         self.agent.gamma = 0.9    
         rewards = [np.ones((10, 1))] * 4

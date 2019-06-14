@@ -81,5 +81,6 @@ python agent_experiment.py --device gpu --per --env Banana_unity ## Prioritized 
 python agent_experiment.py --device gpu --env Banana_unity --max_t 1000 --batch_size 64 --num_episodes 200 --score_threshold 13 --score_window_size 5 --update_every 10 --eps_decay 0.99 ## Final parameters for the submission
 ```
 
-
+## Test Notes: 
+We tested the implemented algorithm with mountaincarcontinuous-v0, and found it is hard to solve the problem with current implementaion either in PPO or DDPG. Because the mountaincar problem has very sparse a final large reward, and the current implementation of reply buffer is not very efficient at learning it. Most of the time the agent spend is to learn the boring experiences. 
 

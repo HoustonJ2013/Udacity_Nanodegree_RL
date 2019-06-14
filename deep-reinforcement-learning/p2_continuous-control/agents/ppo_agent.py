@@ -22,7 +22,6 @@ TAU = 1e-3              # for soft update of target parameters
 LR_ACTOR = 1e-4         # learning rate of the actor 
 LR_CRITIC = 3e-4        # learning rate of the critic
 WEIGHT_DECAY = 0.0001   # L2 weight decay
-N_EPISODE_BF_TRAIN = 100
 UPDATE_EVERY = 4        # how often to update the network
 K_epoch = 3
 
@@ -244,8 +243,7 @@ class PPOAgent():
             actor_loss.backward()
             self.actor_optimizer.step()
 
-            ##Update Critic
-
+            ##Update Critic, here the rewards is reward-to-go. 
             self.critic_optimizer.zero_grad()
             target_values = rewards
             values = self.critic_local(states, actions)

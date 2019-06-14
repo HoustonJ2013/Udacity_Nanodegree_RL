@@ -1,0 +1,225 @@
+Found path: /media/jingbo/1TB_disk/02_Study/04_DeepLearning/04_Reinforcement_Learning/Udacity_Nanodegree_RL/deep-reinforcement-learning/p2_continuous-control/Reacher_Linux/Reacher.x86_64
+Mono path[0] = '/media/jingbo/1TB_disk/02_Study/04_DeepLearning/04_Reinforcement_Learning/Udacity_Nanodegree_RL/deep-reinforcement-learning/p2_continuous-control/Reacher_Linux/Reacher_Data/Managed'
+Mono config path = '/media/jingbo/1TB_disk/02_Study/04_DeepLearning/04_Reinforcement_Learning/Udacity_Nanodegree_RL/deep-reinforcement-learning/p2_continuous-control/Reacher_Linux/Reacher_Data/MonoBleedingEdge/etc'
+Preloaded 'ScreenSelector.so'
+Preloaded 'libgrpc_csharp_ext.x64.so'
+Unable to preload the following plugins:
+	ScreenSelector.so
+	libgrpc_csharp_ext.x86.so
+Logging to /home/jingbo/.config/unity3d/Unity Technologies/Unity Environment/Player.log
+Current environment is  Reacher_unity_v1
+State size is 33
+action size is 4
+A typical state looks like [[0.5        0.         0.5        1.         0.5        0.5
+  0.49999998 0.5        0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.5        1.         0.5
+  0.5        0.49999998 0.5        0.5        0.5        0.5
+  0.5        0.5        0.1059947  0.         0.19216925 0.5
+  1.         0.5        0.23349297]]
+Test parameters Namespace(actor_fc_units=128, batch_size=1028, buffer_size=1000000, critic_fc_units1=64, critic_fc_units2=128, critic_fc_units3=64, device='gpu', env='Reacher_unity_v1', gamma=0.99, loss='mse', lr=0.0005, lr_actor=0.0001, lr_critic=0.0003, max_t=2000, n_episode_bf_train=0, n_episode_stop_explore=200, num_episodes=5000, per=False, save_replay=False, score_threshold=30, score_window_size=100, tau=0.001, testname='', update_every=1, weight_decay=0, workers=8)
+Training uses GPU
+Actor weights initialized the same between local and target
+Critic weights initialized the same between local and target
+ReplayBuffer is instantiated
+
+Episode 1	 Average Score: 0.00  	 Game length 1001 Critic Running Loss: nan Actor Running Loss: nan
+Episode 2	 Average Score: 0.01  	 Game length 1001 Critic Running Loss: 0.00000 Actor Running Loss: 0.09167
+Episode 3	 Average Score: 0.01  	 Game length 1001 Critic Running Loss: 0.00000 Actor Running Loss: 0.08724
+Episode 4	 Average Score: 0.21  	 Game length 1001 Critic Running Loss: 0.00000 Actor Running Loss: 0.08385
+Episode 5	 Average Score: 0.27  	 Game length 1001 Critic Running Loss: 0.00000 Actor Running Loss: 0.08041
+Episode 6	 Average Score: 0.35  	 Game length 1001 Critic Running Loss: 0.00000 Actor Running Loss: 0.07686
+Episode 7	 Average Score: 0.46  	 Game length 1001 Critic Running Loss: 0.00000 Actor Running Loss: 0.07325
+Episode 8	 Average Score: 0.47  	 Game length 1001 Critic Running Loss: 0.00000 Actor Running Loss: 0.06963
+Episode 9	 Average Score: 0.43  	 Game length 1001 Critic Running Loss: 0.00000 Actor Running Loss: 0.06571
+Episode 10	 Average Score: 0.40  	 Game length 1001 Critic Running Loss: 0.00001 Actor Running Loss: 0.06174
+Episode 11	 Average Score: 0.39  	 Game length 1001 Critic Running Loss: 0.00001 Actor Running Loss: 0.05766
+Episode 12	 Average Score: 0.39  	 Game length 1001 Critic Running Loss: 0.00001 Actor Running Loss: 0.05351
+Episode 13	 Average Score: 0.41  	 Game length 1001 Critic Running Loss: 0.00001 Actor Running Loss: 0.04916
+Episode 14	 Average Score: 0.41  	 Game length 1001 Critic Running Loss: 0.00001 Actor Running Loss: 0.04452
+Episode 15	 Average Score: 0.45  	 Game length 1001 Critic Running Loss: 0.00001 Actor Running Loss: 0.03976
+Episode 16	 Average Score: 0.48  	 Game length 1001 Critic Running Loss: 0.00002 Actor Running Loss: 0.03473
+Episode 17	 Average Score: 0.50  	 Game length 1001 Critic Running Loss: 0.00002 Actor Running Loss: 0.02925
+Episode 18	 Average Score: 0.54  	 Game length 1001 Critic Running Loss: 0.00003 Actor Running Loss: 0.02330
+Episode 19	 Average Score: 0.57  	 Game length 1001 Critic Running Loss: 0.00004 Actor Running Loss: 0.01686
+Episode 20	 Average Score: 0.59  	 Game length 1001 Critic Running Loss: 0.00004 Actor Running Loss: 0.01003
+Episode 21	 Average Score: 0.61  	 Game length 1001 Critic Running Loss: 0.00005 Actor Running Loss: 0.00300
+Episode 22	 Average Score: 0.67  	 Game length 1001 Critic Running Loss: 0.00006 Actor Running Loss: -0.00426
+Episode 23	 Average Score: 0.66  	 Game length 1001 Critic Running Loss: 0.00007 Actor Running Loss: -0.01177
+Episode 24	 Average Score: 0.63  	 Game length 1001 Critic Running Loss: 0.00008 Actor Running Loss: -0.01958
+Episode 25	 Average Score: 0.64  	 Game length 1001 Critic Running Loss: 0.00009 Actor Running Loss: -0.02765
+Episode 26	 Average Score: 0.64  	 Game length 1001 Critic Running Loss: 0.00011 Actor Running Loss: -0.03589
+Episode 27	 Average Score: 0.68  	 Game length 1001 Critic Running Loss: 0.00012 Actor Running Loss: -0.04430
+Episode 28	 Average Score: 0.69  	 Game length 1001 Critic Running Loss: 0.00014 Actor Running Loss: -0.05278
+Episode 29	 Average Score: 0.71  	 Game length 1001 Critic Running Loss: 0.00015 Actor Running Loss: -0.06131
+Episode 30	 Average Score: 0.71  	 Game length 1001 Critic Running Loss: 0.00017 Actor Running Loss: -0.06988
+Episode 31	 Average Score: 0.69  	 Game length 1001 Critic Running Loss: 0.00019 Actor Running Loss: -0.07850
+Episode 32	 Average Score: 0.68  	 Game length 1001 Critic Running Loss: 0.00021 Actor Running Loss: -0.08724
+Episode 33	 Average Score: 0.67  	 Game length 1001 Critic Running Loss: 0.00023 Actor Running Loss: -0.09605
+Episode 34	 Average Score: 0.69  	 Game length 1001 Critic Running Loss: 0.00025 Actor Running Loss: -0.10482
+Episode 35	 Average Score: 0.69  	 Game length 1001 Critic Running Loss: 0.00027 Actor Running Loss: -0.11353
+Episode 36	 Average Score: 0.69  	 Game length 1001 Critic Running Loss: 0.00029 Actor Running Loss: -0.12218
+Episode 37	 Average Score: 0.71  	 Game length 1001 Critic Running Loss: 0.00031 Actor Running Loss: -0.13079
+Episode 38	 Average Score: 0.74  	 Game length 1001 Critic Running Loss: 0.00033 Actor Running Loss: -0.13943
+Episode 39	 Average Score: 0.74  	 Game length 1001 Critic Running Loss: 0.00036 Actor Running Loss: -0.14803
+Episode 40	 Average Score: 0.73  	 Game length 1001 Critic Running Loss: 0.00038 Actor Running Loss: -0.15667
+Episode 41	 Average Score: 0.74  	 Game length 1001 Critic Running Loss: 0.00040 Actor Running Loss: -0.16529
+Episode 42	 Average Score: 0.76  	 Game length 1001 Critic Running Loss: 0.00042 Actor Running Loss: -0.17385
+Episode 43	 Average Score: 0.76  	 Game length 1001 Critic Running Loss: 0.00044 Actor Running Loss: -0.18235
+Episode 44	 Average Score: 0.82  	 Game length 1001 Critic Running Loss: 0.00046 Actor Running Loss: -0.19081
+Episode 45	 Average Score: 0.81  	 Game length 1001 Critic Running Loss: 0.00049 Actor Running Loss: -0.19924
+Episode 46	 Average Score: 0.82  	 Game length 1001 Critic Running Loss: 0.00051 Actor Running Loss: -0.20760
+Episode 47	 Average Score: 0.82  	 Game length 1001 Critic Running Loss: 0.00053 Actor Running Loss: -0.21587
+Episode 48	 Average Score: 0.80  	 Game length 1001 Critic Running Loss: 0.00055 Actor Running Loss: -0.22405
+Episode 49	 Average Score: 0.80  	 Game length 1001 Critic Running Loss: 0.00057 Actor Running Loss: -0.23214
+Episode 50	 Average Score: 0.84  	 Game length 1001 Critic Running Loss: 0.00060 Actor Running Loss: -0.24011
+Episode 51	 Average Score: 0.85  	 Game length 1001 Critic Running Loss: 0.00062 Actor Running Loss: -0.24797
+Episode 52	 Average Score: 0.87  	 Game length 1001 Critic Running Loss: 0.00064 Actor Running Loss: -0.25572
+Episode 53	 Average Score: 0.89  	 Game length 1001 Critic Running Loss: 0.00066 Actor Running Loss: -0.26339
+Episode 54	 Average Score: 0.91  	 Game length 1001 Critic Running Loss: 0.00068 Actor Running Loss: -0.27096
+Episode 55	 Average Score: 0.93  	 Game length 1001 Critic Running Loss: 0.00069 Actor Running Loss: -0.27841
+Episode 56	 Average Score: 0.92  	 Game length 1001 Critic Running Loss: 0.00071 Actor Running Loss: -0.28576
+Episode 57	 Average Score: 0.91  	 Game length 1001 Critic Running Loss: 0.00073 Actor Running Loss: -0.29300
+Episode 58	 Average Score: 0.92  	 Game length 1001 Critic Running Loss: 0.00075 Actor Running Loss: -0.30012
+Episode 59	 Average Score: 0.90  	 Game length 1001 Critic Running Loss: 0.00076 Actor Running Loss: -0.30711
+Episode 60	 Average Score: 0.91  	 Game length 1001 Critic Running Loss: 0.00078 Actor Running Loss: -0.31397
+Episode 61	 Average Score: 0.90  	 Game length 1001 Critic Running Loss: 0.00079 Actor Running Loss: -0.32070
+Episode 62	 Average Score: 0.89  	 Game length 1001 Critic Running Loss: 0.00081 Actor Running Loss: -0.32731
+Episode 63	 Average Score: 0.89  	 Game length 1001 Critic Running Loss: 0.00082 Actor Running Loss: -0.33377
+Episode 64	 Average Score: 0.90  	 Game length 1001 Critic Running Loss: 0.00084 Actor Running Loss: -0.34009
+Episode 65	 Average Score: 0.90  	 Game length 1001 Critic Running Loss: 0.00085 Actor Running Loss: -0.34629
+Episode 66	 Average Score: 0.90  	 Game length 1001 Critic Running Loss: 0.00086 Actor Running Loss: -0.35236
+Episode 67	 Average Score: 0.90  	 Game length 1001 Critic Running Loss: 0.00088 Actor Running Loss: -0.35831
+Episode 68	 Average Score: 0.89  	 Game length 1001 Critic Running Loss: 0.00089 Actor Running Loss: -0.36415
+Episode 69	 Average Score: 0.91  	 Game length 1001 Critic Running Loss: 0.00090 Actor Running Loss: -0.36989
+Episode 70	 Average Score: 0.91  	 Game length 1001 Critic Running Loss: 0.00091 Actor Running Loss: -0.37553
+Episode 71	 Average Score: 0.90  	 Game length 1001 Critic Running Loss: 0.00092 Actor Running Loss: -0.38107
+Episode 72	 Average Score: 0.89  	 Game length 1001 Critic Running Loss: 0.00093 Actor Running Loss: -0.38650
+Episode 73	 Average Score: 0.89  	 Game length 1001 Critic Running Loss: 0.00094 Actor Running Loss: -0.39181
+Episode 74	 Average Score: 0.88  	 Game length 1001 Critic Running Loss: 0.00095 Actor Running Loss: -0.39702
+Episode 75	 Average Score: 0.88  	 Game length 1001 Critic Running Loss: 0.00095 Actor Running Loss: -0.40214
+Episode 76	 Average Score: 0.90  	 Game length 1001 Critic Running Loss: 0.00096 Actor Running Loss: -0.40716
+Episode 77	 Average Score: 0.90  	 Game length 1001 Critic Running Loss: 0.00097 Actor Running Loss: -0.41209
+Episode 78	 Average Score: 0.91  	 Game length 1001 Critic Running Loss: 0.00098 Actor Running Loss: -0.41692
+Episode 79	 Average Score: 0.90  	 Game length 1001 Critic Running Loss: 0.00098 Actor Running Loss: -0.42164
+Episode 80	 Average Score: 0.91  	 Game length 1001 Critic Running Loss: 0.00099 Actor Running Loss: -0.42626
+Episode 81	 Average Score: 0.91  	 Game length 1001 Critic Running Loss: 0.00100 Actor Running Loss: -0.43078
+Episode 82	 Average Score: 0.90  	 Game length 1001 Critic Running Loss: 0.00100 Actor Running Loss: -0.43520
+Episode 83	 Average Score: 0.91  	 Game length 1001 Critic Running Loss: 0.00101 Actor Running Loss: -0.43953
+Episode 84	 Average Score: 0.91  	 Game length 1001 Critic Running Loss: 0.00101 Actor Running Loss: -0.44378
+Episode 85	 Average Score: 0.91  	 Game length 1001 Critic Running Loss: 0.00102 Actor Running Loss: -0.44794
+Episode 86	 Average Score: 0.92  	 Game length 1001 Critic Running Loss: 0.00102 Actor Running Loss: -0.45202
+Episode 87	 Average Score: 0.92  	 Game length 1001 Critic Running Loss: 0.00103 Actor Running Loss: -0.45601
+Episode 88	 Average Score: 0.92  	 Game length 1001 Critic Running Loss: 0.00103 Actor Running Loss: -0.45993
+Episode 89	 Average Score: 0.92  	 Game length 1001 Critic Running Loss: 0.00104 Actor Running Loss: -0.46376
+Episode 90	 Average Score: 0.92  	 Game length 1001 Critic Running Loss: 0.00104 Actor Running Loss: -0.46753
+Episode 91	 Average Score: 0.92  	 Game length 1001 Critic Running Loss: 0.00104 Actor Running Loss: -0.47122
+Episode 92	 Average Score: 0.91  	 Game length 1001 Critic Running Loss: 0.00105 Actor Running Loss: -0.47485
+Episode 93	 Average Score: 0.91  	 Game length 1001 Critic Running Loss: 0.00105 Actor Running Loss: -0.47840
+Episode 94	 Average Score: 0.93  	 Game length 1001 Critic Running Loss: 0.00105 Actor Running Loss: -0.48188
+Episode 95	 Average Score: 0.93  	 Game length 1001 Critic Running Loss: 0.00106 Actor Running Loss: -0.48528
+Episode 96	 Average Score: 0.92  	 Game length 1001 Critic Running Loss: 0.00106 Actor Running Loss: -0.48860
+Episode 97	 Average Score: 0.92  	 Game length 1001 Critic Running Loss: 0.00106 Actor Running Loss: -0.49185
+Episode 98	 Average Score: 0.92  	 Game length 1001 Critic Running Loss: 0.00107 Actor Running Loss: -0.49502
+Episode 99	 Average Score: 0.93  	 Game length 1001 Critic Running Loss: 0.00107 Actor Running Loss: -0.49811
+Episode 100	 Average Score: 0.92  	 Game length 1001 Critic Running Loss: 0.00107 Actor Running Loss: -0.50113
+Episode 100	Average Score: 0.92 and Average game length 1001.0 critic running_loss 0.0010703926519216155 actor running_loss -0.5011341802484837
+
+Episode 101	 Average Score: 0.95  	 Game length 1001 Critic Running Loss: 0.00107 Actor Running Loss: -0.50409
+Episode 102	 Average Score: 0.96  	 Game length 1001 Critic Running Loss: 0.00107 Actor Running Loss: -0.50698
+Episode 103	 Average Score: 0.97  	 Game length 1001 Critic Running Loss: 0.00108 Actor Running Loss: -0.50981
+Episode 104	 Average Score: 0.98  	 Game length 1001 Critic Running Loss: 0.00108 Actor Running Loss: -0.51258
+Episode 105	 Average Score: 0.98  	 Game length 1001 Critic Running Loss: 0.00108 Actor Running Loss: -0.51528
+Episode 106	 Average Score: 0.98  	 Game length 1001 Critic Running Loss: 0.00108 Actor Running Loss: -0.51792
+Episode 107	 Average Score: 0.99  	 Game length 1001 Critic Running Loss: 0.00108 Actor Running Loss: -0.52049
+Episode 108	 Average Score: 0.98  	 Game length 1001 Critic Running Loss: 0.00108 Actor Running Loss: -0.52302
+Episode 109	 Average Score: 1.00  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.52548
+Episode 110	 Average Score: 1.01  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.52788
+Episode 111	 Average Score: 1.01  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.53024
+Episode 112	 Average Score: 1.01  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.53256
+Episode 113	 Average Score: 1.01  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.53482
+Episode 114	 Average Score: 1.02  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.53703
+Episode 115	 Average Score: 1.02  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.53919
+Episode 116	 Average Score: 1.02  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.54130
+Episode 117	 Average Score: 1.02  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.54337
+Episode 118	 Average Score: 1.02  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.54538
+Episode 119	 Average Score: 1.02  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.54734
+Episode 120	 Average Score: 1.01  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.54925
+Episode 121	 Average Score: 1.01  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.55112
+Episode 122	 Average Score: 1.01  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.55295
+Episode 123	 Average Score: 1.01  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.55474
+Episode 124	 Average Score: 1.03  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.55649
+Episode 125	 Average Score: 1.02  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.55819
+Episode 126	 Average Score: 1.02  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.55984
+Episode 127	 Average Score: 1.01  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.56146
+Episode 128	 Average Score: 1.03  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.56304
+Episode 129	 Average Score: 1.03  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.56458
+Episode 130	 Average Score: 1.03  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.56608
+Episode 131	 Average Score: 1.03  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.56755
+Episode 132	 Average Score: 1.04  	 Game length 1001 Critic Running Loss: 0.00109 Actor Running Loss: -0.56897
+Episode 133	 Average Score: 1.06  	 Game length 1001 Critic Running Loss: 0.00108 Actor Running Loss: -0.57036
+Episode 134	 Average Score: 1.05  	 Game length 1001 Critic Running Loss: 0.00108 Actor Running Loss: -0.57171
+Episode 135	 Average Score: 1.05  	 Game length 1001 Critic Running Loss: 0.00108 Actor Running Loss: -0.57302
+Episode 136	 Average Score: 1.06  	 Game length 1001 Critic Running Loss: 0.00108 Actor Running Loss: -0.57430
+Episode 137	 Average Score: 1.05  	 Game length 1001 Critic Running Loss: 0.00108 Actor Running Loss: -0.57554
+Episode 138	 Average Score: 1.04  	 Game length 1001 Critic Running Loss: 0.00108 Actor Running Loss: -0.57675
+Episode 139	 Average Score: 1.04  	 Game length 1001 Critic Running Loss: 0.00108 Actor Running Loss: -0.57792
+Episode 140	 Average Score: 1.04  	 Game length 1001 Critic Running Loss: 0.00108 Actor Running Loss: -0.57907
+Episode 141	 Average Score: 1.04  	 Game length 1001 Critic Running Loss: 0.00107 Actor Running Loss: -0.58018
+Episode 142	 Average Score: 1.03  	 Game length 1001 Critic Running Loss: 0.00107 Actor Running Loss: -0.58126
+Episode 143	 Average Score: 1.03  	 Game length 1001 Critic Running Loss: 0.00107 Actor Running Loss: -0.58231
+Episode 144	 Average Score: 1.02  	 Game length 1001 Critic Running Loss: 0.00107 Actor Running Loss: -0.58333
+Episode 145	 Average Score: 1.05  	 Game length 1001 Critic Running Loss: 0.00107 Actor Running Loss: -0.58432
+Episode 146	 Average Score: 1.05  	 Game length 1001 Critic Running Loss: 0.00107 Actor Running Loss: -0.58528
+Episode 147	 Average Score: 1.06  	 Game length 1001 Critic Running Loss: 0.00106 Actor Running Loss: -0.58620
+Episode 148	 Average Score: 1.06  	 Game length 1001 Critic Running Loss: 0.00106 Actor Running Loss: -0.58709
+Episode 149	 Average Score: 1.06  	 Game length 1001 Critic Running Loss: 0.00106 Actor Running Loss: -0.58796
+Episode 150	 Average Score: 1.04  	 Game length 1001 Critic Running Loss: 0.00106 Actor Running Loss: -0.58880
+Episode 151	 Average Score: 1.04  	 Game length 1001 Critic Running Loss: 0.00106 Actor Running Loss: -0.58961
+Episode 152	 Average Score: 1.04  	 Game length 1001 Critic Running Loss: 0.00105 Actor Running Loss: -0.59038
+Episode 153	 Average Score: 1.03  	 Game length 1001 Critic Running Loss: 0.00105 Actor Running Loss: -0.59113
+Episode 154	 Average Score: 1.02  	 Game length 1001 Critic Running Loss: 0.00105 Actor Running Loss: -0.59185
+Episode 155	 Average Score: 1.01  	 Game length 1001 Critic Running Loss: 0.00105 Actor Running Loss: -0.59255
+Episode 156	 Average Score: 1.02  	 Game length 1001 Critic Running Loss: 0.00105 Actor Running Loss: -0.59322
+Episode 157	 Average Score: 1.04  	 Game length 1001 Critic Running Loss: 0.00105 Actor Running Loss: -0.59386
+Episode 158	 Average Score: 1.04  	 Game length 1001 Critic Running Loss: 0.00104 Actor Running Loss: -0.59447
+Episode 159	 Average Score: 1.06  	 Game length 1001 Critic Running Loss: 0.00104 Actor Running Loss: -0.59506
+Episode 160	 Average Score: 1.05  	 Game length 1001 Critic Running Loss: 0.00104 Actor Running Loss: -0.59563
+Episode 161	 Average Score: 1.05  	 Game length 1001 Critic Running Loss: 0.00104 Actor Running Loss: -0.59618
+Episode 162	 Average Score: 1.05  	 Game length 1001 Critic Running Loss: 0.00103 Actor Running Loss: -0.59671
+Episode 163	 Average Score: 1.05  	 Game length 1001 Critic Running Loss: 0.00103 Actor Running Loss: -0.59721
+Episode 164	 Average Score: 1.06  	 Game length 1001 Critic Running Loss: 0.00103 Actor Running Loss: -0.59770
+Episode 165	 Average Score: 1.05  	 Game length 1001 Critic Running Loss: 0.00103 Actor Running Loss: -0.59816
+Episode 166	 Average Score: 1.06  	 Game length 1001 Critic Running Loss: 0.00103 Actor Running Loss: -0.59861
+Episode 167	 Average Score: 1.06  	 Game length 1001 Critic Running Loss: 0.00102 Actor Running Loss: -0.59903
+Episode 168	 Average Score: 1.06  	 Game length 1001 Critic Running Loss: 0.00102 Actor Running Loss: -0.59943
+Episode 169	 Average Score: 1.06  	 Game length 1001 Critic Running Loss: 0.00102 Actor Running Loss: -0.59981
+Episode 170	 Average Score: 1.06  	 Game length 1001 Critic Running Loss: 0.00102 Actor Running Loss: -0.60017
+Episode 171	 Average Score: 1.06  	 Game length 1001 Critic Running Loss: 0.00102 Actor Running Loss: -0.60051
+Episode 172	 Average Score: 1.07  	 Game length 1001 Critic Running Loss: 0.00101 Actor Running Loss: -0.60083
+Episode 173	 Average Score: 1.08  	 Game length 1001 Critic Running Loss: 0.00101 Actor Running Loss: -0.60113
+Episode 174	 Average Score: 1.09  	 Game length 1001 Critic Running Loss: 0.00101 Actor Running Loss: -0.60141
+Episode 175	 Average Score: 1.10  	 Game length 1001 Critic Running Loss: 0.00101 Actor Running Loss: -0.60167
+Episode 176	 Average Score: 1.08  	 Game length 1001 Critic Running Loss: 0.00101 Actor Running Loss: -0.60191
+Episode 177	 Average Score: 1.09  	 Game length 1001 Critic Running Loss: 0.00100 Actor Running Loss: -0.60214
+Episode 178	 Average Score: 1.09  	 Game length 1001 Critic Running Loss: 0.00100 Actor Running Loss: -0.60235
+Episode 179	 Average Score: 1.11  	 Game length 1001 Critic Running Loss: 0.00100 Actor Running Loss: -0.60254
+Episode 180	 Average Score: 1.11  	 Game length 1001 Critic Running Loss: 0.00100 Actor Running Loss: -0.60272
+Episode 181	 Average Score: 1.11  	 Game length 1001 Critic Running Loss: 0.00100 Actor Running Loss: -0.60288
+Episode 182	 Average Score: 1.13  	 Game length 1001 Critic Running Loss: 0.00099 Actor Running Loss: -0.60302
+Episode 183	 Average Score: 1.12  	 Game length 1001 Critic Running Loss: 0.00099 Actor Running Loss: -0.60316
+Episode 184	 Average Score: 1.14  	 Game length 1001 Critic Running Loss: 0.00099 Actor Running Loss: -0.60328
+Episode 185	 Average Score: 1.15  	 Game length 1001 Critic Running Loss: 0.00099 Actor Running Loss: -0.60339
+Episode 186	 Average Score: 1.16  	 Game length 1001 Critic Running Loss: 0.00099 Actor Running Loss: -0.60348
+Episode 187	 Average Score: 1.16  	 Game length 1001 Critic Running Loss: 0.00098 Actor Running Loss: -0.60356
+Episode 188	 Average Score: 1.16  	 Game length 1001 Critic Running Loss: 0.00098 Actor Running Loss: -0.60364
+Episode 189	 Average Score: 1.17  	 Game length 1001 Critic Running Loss: 0.00098 Actor Running Loss: -0.60370
+Episode 190	 Average Score: 1.18  	 Game length 1001 Critic Running Loss: 0.00098 Actor Running Loss: -0.60375
+Episode 191	 Average Score: 1.20  	 Game length 1001 Critic Running Loss: 0.00098 Actor Running Loss: -0.60379
+Episode 192	 Average Score: 1.22  	 Game length 1001 Critic Running Loss: 0.00097 Actor Running Loss: -0.60383
+Episode 193	 Average Score: 1.23  	 Game length 1001 Critic Running Loss: 0.00097 Actor Running Loss: -0.60385
+Episode 194	 Average Score: 1.21  	 Game length 1001 Critic Running Loss: 0.00097 Actor Running Loss: -0.60386
+Episode 195	 Average Score: 1.25  	 Game length 1001 Critic Running Loss: 0.00097 Actor Running Loss: -0.60387
+Episode 196	 Average Score: 1.24  	 Game length 1001 Critic Running Loss: 0.00097 Actor Running Loss: -0.60387
+Episode 197	 Average Score: 1.24  	 Game length 1001 Critic Running Loss: 0.00097 Actor Running Loss: -0.60386
+Episode 198	 Average Score: 1.25  	 Game length 1001 Critic Running Loss: 0.00096 Actor Running Loss: -0.60384
+Episode 199	 Average Score: 1.26  	 Game length 1001 Critic Running Loss: 0.00096 Actor Running Loss: -0.60381

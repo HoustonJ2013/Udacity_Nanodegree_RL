@@ -18,28 +18,28 @@ def main(args):
 
     ## Support two environment, LunarLander was used to debug 
     if args.env == "Reacher_unity":
-        model_param = {"actor_fc_units": 64, 
-                    "critic_fc_units1": 32, 
-                    "critic_fc_units2": 64, 
-                    "critic_fc_units3": 64}
+        model_param = {"actor_fc_units": args.actor_fc_units, 
+                    "critic_fc_units1": args.critic_fc_units1, 
+                    "critic_fc_units2": args.critic_fc_units2, 
+                    "critic_fc_units3": args.critic_fc_units3}
         env = UnityEnv_Reacher(env_file="Reacher_Linux/Reacher.x86_64")
         state_size = env.state_size
         action_size = env.action_size
 
     elif args.env == "Reacher_unity_v2":
-        model_param = {"actor_fc_units": 64, 
-                    "critic_fc_units1": 32, 
-                    "critic_fc_units2": 64, 
-                    "critic_fc_units3": 64}
+        model_param = {"actor_fc_units": args.actor_fc_units, 
+                    "critic_fc_units1": args.critic_fc_units1, 
+                    "critic_fc_units2": args.critic_fc_units2, 
+                    "critic_fc_units3": args.critic_fc_units3}
         env = UnityEnv_Reacher(env_file="Reacher_Linux_20/Reacher.x86_64")
         state_size = env.state_size
         action_size = env.action_size
 
     elif args.env == "MountainCarContinuous-v0":  ## LunarLanderContinuous-v2
-        model_param = {"actor_fc_units": 10, 
-                    "critic_fc_units1": 2, 
-                    "critic_fc_units2": 10, 
-                    "critic_fc_units3": 10}
+        model_param = {"actor_fc_units": args.actor_fc_units, 
+                    "critic_fc_units1": args.critic_fc_units1, 
+                    "critic_fc_units2": args.critic_fc_units2, 
+                    "critic_fc_units3": args.critic_fc_units3}
 
         env = Vgym('MountainCarContinuous-v0')
         state_size = env.env.observation_space.shape[0]
@@ -93,17 +93,17 @@ def main(args):
     now_string = strftime("%Y_%m_%d_%H_%M_%S", gmtime()) 
 
     evaluate_n_iter = args.evaluate_n_iter
-    action_std = 1
+    action_std = args.std_start
 
     for i_iter in range(1, n_iterations+1):
 
         ## Run roll outs 
-        action_std = max(action_std * 0.99, 0.3)
+        action_std = max(action_std * args.std_decay, args.std_end)
         agent.run_policy(action_std=action_std, n_step=20)
         ## Learng and updates 
         agent.learn(batch_size=256, k_epoch=20)
 
-        print("\rTraining agent iteration %i action std %f training loss actor %f and critic %f"%(i_iter, 
+        print("\nTraining agent iteration %i action std %f training loss actor %f and critic %f"%(i_iter, 
                                                                                     action_std, 
                                                                                     np.mean(agent.actor_running_loss), 
                                                                                     np.mean(agent.critic_running_loss)), flush=True, end="")
@@ -140,6 +140,10 @@ if __name__ == "__main__":
     parser.add_argument('--lr', type=float, default=5e-4)
     parser.add_argument('--lr_actor', type=float, default=1e-3)
     parser.add_argument('--lr_critic', type=float, default=5e-3)
+    parser.add_argument('--actor_fc_units', type=int, default=5)
+    parser.add_argument('--critic_fc_units1', type=int, default=2)
+    parser.add_argument('--critic_fc_units2', type=int, default=5)
+    parser.add_argument('--critic_fc_units3', type=int, default=5)
     parser.add_argument('--weight_decay', type=float, default=0)
     parser.add_argument('--update_every', type=int, default=1)
     parser.add_argument('--score_threshold', type=int, default=200)
@@ -152,9 +156,9 @@ if __name__ == "__main__":
                         help='No. of iterations to train')
     parser.add_argument('--evaluate_n_iter', type=int, default=50,
                         help='Evaluate the agent every n iteration')
-    parser.add_argument('--eps_start', type=float, default=1.0)
-    parser.add_argument('--eps_end', type=float, default=0.01)
-    parser.add_argument('--eps_decay', type=float, default=0.999)
+    parser.add_argument('--std_start', type=float, default=1.0)
+    parser.add_argument('--std_end', type=float, default=0.1)
+    parser.add_argument('--std_decay', type=float, default=0.99)
     parser.add_argument('--max_t', type=int, default=2000)
     parser.add_argument('--loss', type=str, default="mse")
 
