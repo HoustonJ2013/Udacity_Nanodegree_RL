@@ -74,6 +74,10 @@ class AgentTest(TestCase):
         self.agent.run_policy(action_std=0.2)
         self.agent.learn()
 
+    def test_evaluation(self):
+        self.agent.evaluation(eval_episodes=2)
+        pass
+
     
 
 
