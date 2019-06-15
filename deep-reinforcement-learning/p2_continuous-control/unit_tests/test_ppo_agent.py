@@ -1,7 +1,7 @@
 from unittest import TestCase
 import numpy as np
 from agents.ppo_agent import PPOAgent
-from agents.Unity_Env import Vgym
+from agents.Unity_Env import Vgym, UnityEnv_Reacher
 import torch
 import gym
 
@@ -44,9 +44,9 @@ class AgentTest(TestCase):
 
     def test_discount_reward(self):
         self.agent.gamma = 0.9    
-        rewards = [np.ones((10, 1))] * 4
+        rewards = [np.ones((10, ))] * 4
         rewards = np.array(rewards)
-        rewards[:, 9, :] = 2
+        rewards[:, 9] = 2
         final_value = np.zeros((10, 1))
         discount_reward = self.agent._discount_reward(rewards, final_value)
         true_discount_reward = np.zeros_like(rewards)
@@ -54,10 +54,10 @@ class AgentTest(TestCase):
         true_discount_reward[1] = 2.71
         true_discount_reward[2] = 1.9
         true_discount_reward[3] = 1
-        true_discount_reward[0, 9, :] = 6.878
-        true_discount_reward[1, 9, :] = 5.42
-        true_discount_reward[2, 9, :] = 3.8
-        true_discount_reward[3, 9, :] = 2
+        true_discount_reward[0, 9] = 6.878
+        true_discount_reward[1, 9] = 5.42
+        true_discount_reward[2, 9] = 3.8
+        true_discount_reward[3, 9] = 2
         # print("calculated discount reward", discount_reward, discount_reward.shape)
         # print("True discount reward", true_discount_reward, true_discount_reward.shape)
         self.assertTrue((true_discount_reward == discount_reward).all())
@@ -75,7 +75,22 @@ class AgentTest(TestCase):
         self.agent.learn()
 
     def test_evaluation(self):
-        self.agent.evaluation(eval_episodes=2)
+        env = UnityEnv_Reacher(env_file="Reacher_Linux_20/Reacher.x86_64")
+        state_size = env.state_size
+        action_size = env.action_size
+        seed = 40
+        model_param = {"actor_fc_units": 128, 
+                    "critic_fc_units1": 64, 
+                    "critic_fc_units2": 128, 
+                    "critic_fc_units3": 64}
+
+        self.agent = PPOAgent(env=env, state_size=state_size, 
+                           action_size=action_size, 
+                           batch_size=self.batch_size,
+                           model_param=model_param, 
+                           random_seed=seed, 
+                           device=torch.device("cpu"))
+        self.agent.evaluation(eval_episodes=100, action_std=1)
         pass
 
     

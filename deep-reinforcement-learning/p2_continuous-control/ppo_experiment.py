@@ -111,7 +111,7 @@ def main(args):
 
         if i_iter > 0 and i_iter%evaluate_n_iter == 0 or i_iter == n_iterations:
 
-            score, _, game_lens = agent.evaluation(eval_episodes=100)
+            score, _, game_lens = agent.evaluation(eval_episodes=100, action_std=0.1)
             print("\nEvaluation: Average score is %0.3f and average game_len is %i training loss actor %f and critic %f"%(score, int(np.mean(game_lens)), 
                                                                                                             np.mean(agent.actor_running_loss), 
                                                                                                             np.mean(agent.critic_running_loss)))
@@ -152,13 +152,13 @@ if __name__ == "__main__":
     ## Environment related parameters
     parser.add_argument('--env', type=str, default="Reacher_unity_v2")
     # parser.add_argument('--agent', type=str, default="ddpg")
-    parser.add_argument('--n_iterations', type=int, default=20,
+    parser.add_argument('--n_iterations', type=int, default=500,
                         help='No. of iterations to train')
-    parser.add_argument('--evaluate_n_iter', type=int, default=5,
+    parser.add_argument('--evaluate_n_iter', type=int, default=50,
                         help='Evaluate the agent every n iteration')
-    parser.add_argument('--std_start', type=float, default=0.5)
+    parser.add_argument('--std_start', type=float, default=1.0)
     parser.add_argument('--std_end', type=float, default=0.1)
-    parser.add_argument('--std_decay', type=float, default=0.99)
+    parser.add_argument('--std_decay', type=float, default=0.995)
     parser.add_argument('--max_t', type=int, default=2000)
     parser.add_argument('--loss', type=str, default="mse")
 

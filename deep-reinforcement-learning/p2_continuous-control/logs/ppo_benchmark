@@ -1,0 +1,668 @@
+Found path: /media/jingbo/1TB_disk/02_Study/04_DeepLearning/04_Reinforcement_Learning/Udacity_Nanodegree_RL/deep-reinforcement-learning/p2_continuous-control/Reacher_Linux_20/Reacher.x86_64
+Mono path[0] = '/media/jingbo/1TB_disk/02_Study/04_DeepLearning/04_Reinforcement_Learning/Udacity_Nanodegree_RL/deep-reinforcement-learning/p2_continuous-control/Reacher_Linux_20/Reacher_Data/Managed'
+Mono config path = '/media/jingbo/1TB_disk/02_Study/04_DeepLearning/04_Reinforcement_Learning/Udacity_Nanodegree_RL/deep-reinforcement-learning/p2_continuous-control/Reacher_Linux_20/Reacher_Data/MonoBleedingEdge/etc'
+Preloaded 'ScreenSelector.so'
+Preloaded 'libgrpc_csharp_ext.x64.so'
+Unable to preload the following plugins:
+	ScreenSelector.so
+	libgrpc_csharp_ext.x86.so
+Logging to /home/jingbo/.config/unity3d/Unity Technologies/Unity Environment/Player.log
+Namespace(actor_fc_units=128, batch_size=128, buffer_size=10000, critic_fc_units1=64, critic_fc_units2=128, critic_fc_units3=64, device='gpu', env='Reacher_unity_v2', evaluate_n_iter=50, gamma=0.99, loss='mse', lr=0.0005, lr_actor=0.001, lr_critic=0.005, max_t=2000, n_iterations=500, per=False, save_replay=False, score_threshold=13, score_window_size=100, std_decay=0.995, std_end=0.1, std_start=1.0, tau=0.001, testname='', update_every=1, weight_decay=0, workers=8)
+Current environment is  Reacher_unity_v2
+State size is 33
+action size is 4
+A typical state looks like [[0.5        0.         0.5        1.         0.5        0.5
+  0.49999998 0.5        0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.5        1.         0.5
+  0.5        0.49999998 0.5        0.5        0.5        0.5
+  0.5        0.5        0.99384427 0.         0.57821727 0.5
+  1.         0.5        0.23889279]
+ [0.5        0.         0.5        1.         0.5        0.5
+  0.49999998 0.5        0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.5        1.         0.5
+  0.5        0.49999998 0.5        0.5        0.5        0.5
+  0.5        0.5        0.99726105 0.         0.44773579 0.5
+  1.         0.5        0.14263654]
+ [0.5        0.         0.5        1.         0.5        0.5
+  0.49999998 0.5        0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.5        1.         0.5
+  0.5        0.49999998 0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.         0.5        0.5
+  1.         0.5        0.83222294]
+ [0.5        0.         0.5        1.         0.5        0.5
+  0.49999998 0.5        0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.5        1.         0.5
+  0.5        0.49999998 0.5        0.5        0.5        0.5
+  0.5        0.5        0.27300477 0.         0.94550326 0.5
+  1.         0.5        0.47384995]
+ [0.5        0.         0.5        1.         0.5        0.5
+  0.49999998 0.5        0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.5        1.         0.5
+  0.5        0.49999998 0.5        0.5        0.5        0.5
+  0.5        0.5        0.99878204 0.         0.5348782  0.5
+  1.         0.5        0.97384524]
+ [0.5        0.         0.5        1.         0.5        0.5
+  0.49999998 0.5        0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.5        1.         0.5
+  0.5        0.49999998 0.5        0.5        0.5        0.5
+  0.5        0.5        0.00190264 0.         0.45642209 0.5
+  1.         0.5        0.49621838]
+ [0.5        0.         0.5        1.         0.5        0.5
+  0.49999998 0.5        0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.5        1.         0.5
+  0.5        0.49999998 0.5        0.5        0.5        0.5
+  0.5        0.5        0.6627841  0.         0.02724069 0.5
+  1.         0.5        0.58205158]
+ [0.5        0.         0.5        1.         0.5        0.5
+  0.49999998 0.5        0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.5        1.         0.5
+  0.5        0.49999998 0.5        0.5        0.5        0.5
+  0.5        0.5        0.33721602 0.         0.97275925 0.5
+  1.         0.5        0.08160865]
+ [0.5        0.         0.5        1.         0.5        0.5
+  0.49999998 0.5        0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.5        1.         0.5
+  0.5        0.49999998 0.5        0.5        0.5        0.5
+  0.5        0.5        0.73473573 0.         0.94147378 0.5
+  1.         0.5        0.14947391]
+ [0.5        0.         0.5        1.         0.5        0.5
+  0.49999998 0.5        0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.5        1.         0.5
+  0.5        0.49999998 0.5        0.5        0.5        0.5
+  0.5        0.5        0.3126967  0.         0.03640819 0.5
+  1.         0.5        0.50089389]
+ [0.5        0.         0.5        1.         0.5        0.5
+  0.49999998 0.5        0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.5        1.         0.5
+  0.5        0.49999998 0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.         0.5        0.5
+  1.         0.5        0.63744758]
+ [0.5        0.         0.5        1.         0.5        0.5
+  0.49999998 0.5        0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.5        1.         0.5
+  0.5        0.49999998 0.5        0.5        0.5        0.5
+  0.5        0.5        0.53487825 0.         0.00121784 0.5
+  1.         0.5        0.39735132]
+ [0.5        0.         0.5        1.         0.5        0.5
+  0.49999998 0.5        0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.5        1.         0.5
+  0.5        0.49999998 0.5        0.5        0.5        0.5
+  0.5        0.5        0.62096095 0.         0.98514783 0.5
+  1.         0.5        0.62432379]
+ [0.5        0.         0.5        1.         0.5        0.5
+  0.49999998 0.5        0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.5        1.         0.5
+  0.5        0.49999998 0.5        0.5        0.5        0.5
+  0.5        0.5        0.96984631 0.         0.32898998 0.5
+  1.         0.5        0.22764981]
+ [0.5        0.         0.5        1.         0.5        0.5
+  0.49999998 0.5        0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.5        1.         0.5
+  0.5        0.49999998 0.5        0.5        0.5        0.5
+  0.5        0.5        0.78678823 0.         0.90957606 0.5
+  1.         0.5        0.06717014]
+ [0.5        0.         0.5        1.         0.5        0.5
+  0.49999998 0.5        0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.5        1.         0.5
+  0.5        0.49999998 0.5        0.5        0.5        0.5
+  0.5        0.5        0.21321177 0.         0.09042403 0.5
+  1.         0.5        0.07590795]
+ [0.5        0.         0.5        1.         0.5        0.5
+  0.49999998 0.5        0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.5        1.         0.5
+  0.5        0.49999998 0.5        0.5        0.5        0.5
+  0.5        0.5        0.67101002 0.         0.96984625 0.5
+  1.         0.5        0.18269169]
+ [0.5        0.         0.5        1.         0.5        0.5
+  0.49999998 0.5        0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.5        1.         0.5
+  0.5        0.49999998 0.5        0.5        0.5        0.5
+  0.5        0.5        0.2575953  0.         0.93730974 0.5
+  1.         0.5        0.66660617]
+ [0.5        0.         0.5        1.         0.5        0.5
+  0.49999998 0.5        0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.5        1.         0.5
+  0.5        0.49999998 0.5        0.5        0.5        0.5
+  0.5        0.5        0.83456522 0.         0.12842751 0.5
+  1.         0.5        0.47231275]
+ [0.5        0.         0.5        1.         0.5        0.5
+  0.49999998 0.5        0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.5        1.         0.5
+  0.5        0.49999998 0.5        0.5        0.5        0.5
+  0.5        0.5        0.97275925 0.         0.6627841  0.5
+  1.         0.5        0.39005107]]
+Test parameters Namespace(actor_fc_units=128, batch_size=128, buffer_size=10000, critic_fc_units1=64, critic_fc_units2=128, critic_fc_units3=64, device='gpu', env='Reacher_unity_v2', evaluate_n_iter=50, gamma=0.99, loss='mse', lr=0.0005, lr_actor=0.001, lr_critic=0.005, max_t=2000, n_iterations=500, per=False, save_replay=False, score_threshold=13, score_window_size=100, std_decay=0.995, std_end=0.1, std_start=1.0, tau=0.001, testname='', update_every=1, weight_decay=0, workers=8)
+Actor weights initialized the same between local and target
+Critic weights initialized the same between local and target
+
+Training agent iteration 1 action std 0.995000 training loss actor -0.098482 and critic 0.006808
+Training agent iteration 2 action std 0.990025 training loss actor -0.102354 and critic 0.005381
+Training agent iteration 3 action std 0.985075 training loss actor -0.101148 and critic 0.004063
+Training agent iteration 4 action std 0.980150 training loss actor -0.102239 and critic 0.003664
+Training agent iteration 5 action std 0.975249 training loss actor -0.102512 and critic 0.003334
+Training agent iteration 6 action std 0.970373 training loss actor -0.101923 and critic 0.002937
+Training agent iteration 7 action std 0.965521 training loss actor -0.102792 and critic 0.003119
+Training agent iteration 8 action std 0.960693 training loss actor -0.103028 and critic 0.002979
+Training agent iteration 9 action std 0.955890 training loss actor -0.103531 and critic 0.002955
+Training agent iteration 10 action std 0.951110 training loss actor -0.104190 and critic 0.003168
+Training agent iteration 11 action std 0.946355 training loss actor -0.104759 and critic 0.003203
+Training agent iteration 12 action std 0.941623 training loss actor -0.104899 and critic 0.003166
+Training agent iteration 13 action std 0.936915 training loss actor -0.104786 and critic 0.003075
+Training agent iteration 14 action std 0.932230 training loss actor -0.104972 and critic 0.003100
+Training agent iteration 15 action std 0.927569 training loss actor -0.104808 and critic 0.003061
+Training agent iteration 16 action std 0.922931 training loss actor -0.104679 and critic 0.003007
+Training agent iteration 17 action std 0.918316 training loss actor -0.104460 and critic 0.002959
+Training agent iteration 18 action std 0.913725 training loss actor -0.104205 and critic 0.002880
+Training agent iteration 19 action std 0.909156 training loss actor -0.104106 and critic 0.002859
+Training agent iteration 20 action std 0.904610 training loss actor -0.103868 and critic 0.002823
+Training agent iteration 21 action std 0.900087 training loss actor -0.104048 and critic 0.002606
+Training agent iteration 22 action std 0.895587 training loss actor -0.103536 and critic 0.002485
+Training agent iteration 23 action std 0.891109 training loss actor -0.103452 and critic 0.002491
+Training agent iteration 24 action std 0.886654 training loss actor -0.102997 and critic 0.002466
+Training agent iteration 25 action std 0.882220 training loss actor -0.102713 and critic 0.002459
+Training agent iteration 26 action std 0.877809 training loss actor -0.102974 and critic 0.002597
+Training agent iteration 27 action std 0.873420 training loss actor -0.102777 and critic 0.002561
+Training agent iteration 28 action std 0.869053 training loss actor -0.102437 and critic 0.002602
+Training agent iteration 29 action std 0.864708 training loss actor -0.101855 and critic 0.002572
+Training agent iteration 30 action std 0.860384 training loss actor -0.101255 and critic 0.002440
+Training agent iteration 31 action std 0.856082 training loss actor -0.100565 and critic 0.002374
+Training agent iteration 32 action std 0.851802 training loss actor -0.099910 and critic 0.002317
+Training agent iteration 33 action std 0.847543 training loss actor -0.099766 and critic 0.002393
+Training agent iteration 34 action std 0.843305 training loss actor -0.099374 and critic 0.002364
+Training agent iteration 35 action std 0.839089 training loss actor -0.099289 and critic 0.002442
+Training agent iteration 36 action std 0.834893 training loss actor -0.099083 and critic 0.002530
+Training agent iteration 37 action std 0.830719 training loss actor -0.099061 and critic 0.002637
+Training agent iteration 38 action std 0.826565 training loss actor -0.098907 and critic 0.002719
+Training agent iteration 39 action std 0.822432 training loss actor -0.098633 and critic 0.002787
+Training agent iteration 40 action std 0.818320 training loss actor -0.098698 and critic 0.002878
+Training agent iteration 41 action std 0.814229 training loss actor -0.098526 and critic 0.002942
+Training agent iteration 42 action std 0.810157 training loss actor -0.098351 and critic 0.003000
+Training agent iteration 43 action std 0.806107 training loss actor -0.098235 and critic 0.003097
+Training agent iteration 44 action std 0.802076 training loss actor -0.098271 and critic 0.003209
+Training agent iteration 45 action std 0.798066 training loss actor -0.098035 and critic 0.003237
+Training agent iteration 46 action std 0.794075 training loss actor -0.097692 and critic 0.003237
+Training agent iteration 47 action std 0.790105 training loss actor -0.097487 and critic 0.003313
+Training agent iteration 48 action std 0.786154 training loss actor -0.097349 and critic 0.003353
+Training agent iteration 49 action std 0.782224 training loss actor -0.097051 and critic 0.003384
+Training agent iteration 50 action std 0.778313 training loss actor -0.097115 and critic 0.003501Evaluate 6 iterations
+
+Evaluation: Average score is 0.144 and average game_len is 1000 training loss actor -0.097115 and critic 0.003501
+
+Training agent iteration 51 action std 0.774421 training loss actor -0.097091 and critic 0.003575
+Training agent iteration 52 action std 0.770549 training loss actor -0.097221 and critic 0.003735
+Training agent iteration 53 action std 0.766696 training loss actor -0.096957 and critic 0.003763
+Training agent iteration 54 action std 0.762863 training loss actor -0.096485 and critic 0.003763
+Training agent iteration 55 action std 0.759048 training loss actor -0.096064 and critic 0.003747
+Training agent iteration 56 action std 0.755253 training loss actor -0.095944 and critic 0.003794
+Training agent iteration 57 action std 0.751477 training loss actor -0.095573 and critic 0.003750
+Training agent iteration 58 action std 0.747719 training loss actor -0.094812 and critic 0.003688
+Training agent iteration 59 action std 0.743981 training loss actor -0.094719 and critic 0.003757
+Training agent iteration 60 action std 0.740261 training loss actor -0.094058 and critic 0.003738
+Training agent iteration 61 action std 0.736560 training loss actor -0.093399 and critic 0.003692
+Training agent iteration 62 action std 0.732877 training loss actor -0.093046 and critic 0.003750
+Training agent iteration 63 action std 0.729212 training loss actor -0.092544 and critic 0.003734
+Training agent iteration 64 action std 0.725566 training loss actor -0.091796 and critic 0.003650
+Training agent iteration 65 action std 0.721939 training loss actor -0.091392 and critic 0.003728
+Training agent iteration 66 action std 0.718329 training loss actor -0.090593 and critic 0.003649
+Training agent iteration 67 action std 0.714737 training loss actor -0.089658 and critic 0.003498
+Training agent iteration 68 action std 0.711164 training loss actor -0.088925 and critic 0.003421
+Training agent iteration 69 action std 0.707608 training loss actor -0.088763 and critic 0.003467
+Training agent iteration 70 action std 0.704070 training loss actor -0.087869 and critic 0.003349
+Training agent iteration 71 action std 0.700549 training loss actor -0.087047 and critic 0.003272
+Training agent iteration 72 action std 0.697047 training loss actor -0.086290 and critic 0.003172
+Training agent iteration 73 action std 0.693561 training loss actor -0.085904 and critic 0.003179
+Training agent iteration 74 action std 0.690094 training loss actor -0.085633 and critic 0.003244
+Training agent iteration 75 action std 0.686643 training loss actor -0.085064 and critic 0.003229
+Training agent iteration 76 action std 0.683210 training loss actor -0.084590 and critic 0.003207
+Training agent iteration 77 action std 0.679794 training loss actor -0.084066 and critic 0.003245
+Training agent iteration 78 action std 0.676395 training loss actor -0.083983 and critic 0.003310
+Training agent iteration 79 action std 0.673013 training loss actor -0.083760 and critic 0.003331
+Training agent iteration 80 action std 0.669648 training loss actor -0.083639 and critic 0.003375
+Training agent iteration 81 action std 0.666300 training loss actor -0.083368 and critic 0.003404
+Training agent iteration 82 action std 0.662968 training loss actor -0.083330 and critic 0.003473
+Training agent iteration 83 action std 0.659653 training loss actor -0.083173 and critic 0.003541
+Training agent iteration 84 action std 0.656355 training loss actor -0.083171 and critic 0.003641
+Training agent iteration 85 action std 0.653073 training loss actor -0.082833 and critic 0.003617
+Training agent iteration 86 action std 0.649808 training loss actor -0.082698 and critic 0.003746
+Training agent iteration 87 action std 0.646559 training loss actor -0.082273 and critic 0.003763
+Training agent iteration 88 action std 0.643326 training loss actor -0.081950 and critic 0.003778
+Training agent iteration 89 action std 0.640109 training loss actor -0.081530 and critic 0.003804
+Training agent iteration 90 action std 0.636909 training loss actor -0.081218 and critic 0.003825
+Training agent iteration 91 action std 0.633724 training loss actor -0.080962 and critic 0.003854
+Training agent iteration 92 action std 0.630556 training loss actor -0.080590 and critic 0.003832
+Training agent iteration 93 action std 0.627403 training loss actor -0.080010 and critic 0.003830
+Training agent iteration 94 action std 0.624266 training loss actor -0.079630 and critic 0.003808
+Training agent iteration 95 action std 0.621145 training loss actor -0.079266 and critic 0.003817
+Training agent iteration 96 action std 0.618039 training loss actor -0.078755 and critic 0.003762
+Training agent iteration 97 action std 0.614949 training loss actor -0.078350 and critic 0.003699
+Training agent iteration 98 action std 0.611874 training loss actor -0.078010 and critic 0.003699
+Training agent iteration 99 action std 0.608815 training loss actor -0.077201 and critic 0.003561
+Training agent iteration 100 action std 0.605770 training loss actor -0.076492 and critic 0.003500Evaluate 6 iterations
+
+Evaluation: Average score is 0.230 and average game_len is 1000 training loss actor -0.076492 and critic 0.003500
+
+Training agent iteration 101 action std 0.602742 training loss actor -0.076018 and critic 0.003447
+Training agent iteration 102 action std 0.599728 training loss actor -0.075371 and critic 0.003347
+Training agent iteration 103 action std 0.596729 training loss actor -0.075007 and critic 0.003343
+Training agent iteration 104 action std 0.593746 training loss actor -0.074700 and critic 0.003325
+Training agent iteration 105 action std 0.590777 training loss actor -0.074609 and critic 0.003384
+Training agent iteration 106 action std 0.587823 training loss actor -0.074223 and critic 0.003264
+Training agent iteration 107 action std 0.584884 training loss actor -0.074483 and critic 0.003365
+Training agent iteration 108 action std 0.581959 training loss actor -0.074724 and critic 0.003486
+Training agent iteration 109 action std 0.579050 training loss actor -0.074651 and critic 0.003502
+Training agent iteration 110 action std 0.576154 training loss actor -0.074324 and critic 0.003471
+Training agent iteration 111 action std 0.573274 training loss actor -0.074052 and critic 0.003490
+Training agent iteration 112 action std 0.570407 training loss actor -0.073797 and critic 0.003522
+Training agent iteration 113 action std 0.567555 training loss actor -0.073761 and critic 0.003520
+Training agent iteration 114 action std 0.564717 training loss actor -0.073752 and critic 0.003558
+Training agent iteration 115 action std 0.561894 training loss actor -0.073886 and critic 0.003588
+Training agent iteration 116 action std 0.559084 training loss actor -0.073708 and critic 0.003622
+Training agent iteration 117 action std 0.556289 training loss actor -0.074037 and critic 0.003871
+Training agent iteration 118 action std 0.553508 training loss actor -0.073873 and critic 0.003915
+Training agent iteration 119 action std 0.550740 training loss actor -0.073728 and critic 0.004005
+Training agent iteration 120 action std 0.547986 training loss actor -0.073646 and critic 0.004015
+Training agent iteration 121 action std 0.545246 training loss actor -0.073661 and critic 0.004080
+Training agent iteration 122 action std 0.542520 training loss actor -0.073835 and critic 0.004205
+Training agent iteration 123 action std 0.539808 training loss actor -0.073595 and critic 0.004133
+Training agent iteration 124 action std 0.537108 training loss actor -0.073378 and critic 0.004143
+Training agent iteration 125 action std 0.534423 training loss actor -0.073169 and critic 0.004137
+Training agent iteration 126 action std 0.531751 training loss actor -0.073085 and critic 0.004264
+Training agent iteration 127 action std 0.529092 training loss actor -0.072621 and critic 0.004220
+Training agent iteration 128 action std 0.526447 training loss actor -0.071928 and critic 0.004138
+Training agent iteration 129 action std 0.523814 training loss actor -0.071665 and critic 0.004150
+Training agent iteration 130 action std 0.521195 training loss actor -0.071782 and critic 0.004264
+Training agent iteration 131 action std 0.518589 training loss actor -0.071650 and critic 0.004269
+Training agent iteration 132 action std 0.515996 training loss actor -0.071302 and critic 0.004238
+Training agent iteration 133 action std 0.513416 training loss actor -0.070741 and critic 0.004209
+Training agent iteration 134 action std 0.510849 training loss actor -0.070330 and critic 0.004221
+Training agent iteration 135 action std 0.508295 training loss actor -0.069931 and critic 0.004162
+Training agent iteration 136 action std 0.505754 training loss actor -0.070023 and critic 0.004219
+Training agent iteration 137 action std 0.503225 training loss actor -0.069418 and critic 0.004008
+Training agent iteration 138 action std 0.500709 training loss actor -0.069393 and critic 0.004044
+Training agent iteration 139 action std 0.498205 training loss actor -0.069574 and critic 0.004137
+Training agent iteration 140 action std 0.495714 training loss actor -0.069538 and critic 0.004181
+Training agent iteration 141 action std 0.493236 training loss actor -0.069379 and critic 0.004253
+Training agent iteration 142 action std 0.490769 training loss actor -0.069284 and critic 0.004276
+Training agent iteration 143 action std 0.488316 training loss actor -0.069210 and critic 0.004411
+Training agent iteration 144 action std 0.485874 training loss actor -0.068835 and critic 0.004364
+Training agent iteration 145 action std 0.483445 training loss actor -0.068583 and critic 0.004353
+Training agent iteration 146 action std 0.481027 training loss actor -0.068883 and critic 0.004404
+Training agent iteration 147 action std 0.478622 training loss actor -0.068856 and critic 0.004490
+Training agent iteration 148 action std 0.476229 training loss actor -0.068689 and critic 0.004496
+Training agent iteration 149 action std 0.473848 training loss actor -0.067928 and critic 0.004409
+Training agent iteration 150 action std 0.471479 training loss actor -0.067432 and critic 0.004378Evaluate 6 iterations
+
+Evaluation: Average score is 0.234 and average game_len is 1000 training loss actor -0.067432 and critic 0.004378
+
+Training agent iteration 151 action std 0.469121 training loss actor -0.067060 and critic 0.004365
+Training agent iteration 152 action std 0.466776 training loss actor -0.067153 and critic 0.004449
+Training agent iteration 153 action std 0.464442 training loss actor -0.066835 and critic 0.004440
+Training agent iteration 154 action std 0.462120 training loss actor -0.066517 and critic 0.004411
+Training agent iteration 155 action std 0.459809 training loss actor -0.066553 and critic 0.004598
+Training agent iteration 156 action std 0.457510 training loss actor -0.066012 and critic 0.004591
+Training agent iteration 157 action std 0.455222 training loss actor -0.065517 and critic 0.004593
+Training agent iteration 158 action std 0.452946 training loss actor -0.064962 and critic 0.004524
+Training agent iteration 159 action std 0.450682 training loss actor -0.064319 and critic 0.004480
+Training agent iteration 160 action std 0.448428 training loss actor -0.063582 and critic 0.004398
+Training agent iteration 161 action std 0.446186 training loss actor -0.063044 and critic 0.004313
+Training agent iteration 162 action std 0.443955 training loss actor -0.062433 and critic 0.004233
+Training agent iteration 163 action std 0.441735 training loss actor -0.062111 and critic 0.004156
+Training agent iteration 164 action std 0.439527 training loss actor -0.061555 and critic 0.004116
+Training agent iteration 165 action std 0.437329 training loss actor -0.060973 and critic 0.004047
+Training agent iteration 166 action std 0.435142 training loss actor -0.059863 and critic 0.003898
+Training agent iteration 167 action std 0.432967 training loss actor -0.059621 and critic 0.003931
+Training agent iteration 168 action std 0.430802 training loss actor -0.059200 and critic 0.003921
+Training agent iteration 169 action std 0.428648 training loss actor -0.059347 and critic 0.004006
+Training agent iteration 170 action std 0.426505 training loss actor -0.059235 and critic 0.004081
+Training agent iteration 171 action std 0.424372 training loss actor -0.059282 and critic 0.004163
+Training agent iteration 172 action std 0.422250 training loss actor -0.059134 and critic 0.004222
+Training agent iteration 173 action std 0.420139 training loss actor -0.059407 and critic 0.004315
+Training agent iteration 174 action std 0.418038 training loss actor -0.059007 and critic 0.004258
+Training agent iteration 175 action std 0.415948 training loss actor -0.058847 and critic 0.004197
+Training agent iteration 176 action std 0.413868 training loss actor -0.058705 and critic 0.004203
+Training agent iteration 177 action std 0.411799 training loss actor -0.058954 and critic 0.004302
+Training agent iteration 178 action std 0.409740 training loss actor -0.059519 and critic 0.004430
+Training agent iteration 179 action std 0.407691 training loss actor -0.059166 and critic 0.004322
+Training agent iteration 180 action std 0.405653 training loss actor -0.059857 and critic 0.004532
+Training agent iteration 181 action std 0.403625 training loss actor -0.060050 and critic 0.004651
+Training agent iteration 182 action std 0.401606 training loss actor -0.060140 and critic 0.004659
+Training agent iteration 183 action std 0.399598 training loss actor -0.060268 and critic 0.004780
+Training agent iteration 184 action std 0.397600 training loss actor -0.060626 and critic 0.004871
+Training agent iteration 185 action std 0.395612 training loss actor -0.060685 and critic 0.004987
+Training agent iteration 186 action std 0.393634 training loss actor -0.060923 and critic 0.005052
+Training agent iteration 187 action std 0.391666 training loss actor -0.060559 and critic 0.004991
+Training agent iteration 188 action std 0.389708 training loss actor -0.060842 and critic 0.005062
+Training agent iteration 189 action std 0.387759 training loss actor -0.061112 and critic 0.005137
+Training agent iteration 190 action std 0.385821 training loss actor -0.061307 and critic 0.005228
+Training agent iteration 191 action std 0.383891 training loss actor -0.061283 and critic 0.005275
+Training agent iteration 192 action std 0.381972 training loss actor -0.061050 and critic 0.005247
+Training agent iteration 193 action std 0.380062 training loss actor -0.060584 and critic 0.005161
+Training agent iteration 194 action std 0.378162 training loss actor -0.060407 and critic 0.005203
+Training agent iteration 195 action std 0.376271 training loss actor -0.059698 and critic 0.005135
+Training agent iteration 196 action std 0.374390 training loss actor -0.059381 and critic 0.005163
+Training agent iteration 197 action std 0.372518 training loss actor -0.059193 and critic 0.005237
+Training agent iteration 198 action std 0.370655 training loss actor -0.058333 and critic 0.005144
+Training agent iteration 199 action std 0.368802 training loss actor -0.058012 and critic 0.005158
+Training agent iteration 200 action std 0.366958 training loss actor -0.057422 and critic 0.005041Evaluate 6 iterations
+
+Evaluation: Average score is 0.173 and average game_len is 1000 training loss actor -0.057422 and critic 0.005041
+
+Training agent iteration 201 action std 0.365123 training loss actor -0.057231 and critic 0.005006
+Training agent iteration 202 action std 0.363297 training loss actor -0.057164 and critic 0.005071
+Training agent iteration 203 action std 0.361481 training loss actor -0.057027 and critic 0.005029
+Training agent iteration 204 action std 0.359674 training loss actor -0.057111 and critic 0.005114
+Training agent iteration 205 action std 0.357875 training loss actor -0.056936 and critic 0.005015
+Training agent iteration 206 action std 0.356086 training loss actor -0.056675 and critic 0.005027
+Training agent iteration 207 action std 0.354305 training loss actor -0.056585 and critic 0.005058
+Training agent iteration 208 action std 0.352534 training loss actor -0.056094 and critic 0.004994
+Training agent iteration 209 action std 0.350771 training loss actor -0.055624 and critic 0.005013
+Training agent iteration 210 action std 0.349017 training loss actor -0.055451 and critic 0.004961
+Training agent iteration 211 action std 0.347272 training loss actor -0.055266 and critic 0.004990
+Training agent iteration 212 action std 0.345536 training loss actor -0.055221 and critic 0.005031
+Training agent iteration 213 action std 0.343808 training loss actor -0.054866 and critic 0.005024
+Training agent iteration 214 action std 0.342089 training loss actor -0.054972 and critic 0.005117
+Training agent iteration 215 action std 0.340379 training loss actor -0.055226 and critic 0.005183
+Training agent iteration 216 action std 0.338677 training loss actor -0.055390 and critic 0.005184
+Training agent iteration 217 action std 0.336983 training loss actor -0.054983 and critic 0.005052
+Training agent iteration 218 action std 0.335298 training loss actor -0.054848 and critic 0.005062
+Training agent iteration 219 action std 0.333622 training loss actor -0.055193 and critic 0.005160
+Training agent iteration 220 action std 0.331954 training loss actor -0.054989 and critic 0.005254
+Training agent iteration 221 action std 0.330294 training loss actor -0.054591 and critic 0.005198
+Training agent iteration 222 action std 0.328643 training loss actor -0.053661 and critic 0.005122
+Training agent iteration 223 action std 0.326999 training loss actor -0.052961 and critic 0.005076
+Training agent iteration 224 action std 0.325364 training loss actor -0.052189 and critic 0.004999
+Training agent iteration 225 action std 0.323738 training loss actor -0.051933 and critic 0.005079
+Training agent iteration 226 action std 0.322119 training loss actor -0.052084 and critic 0.005145
+Training agent iteration 227 action std 0.320508 training loss actor -0.051848 and critic 0.005153
+Training agent iteration 228 action std 0.318906 training loss actor -0.051930 and critic 0.005239
+Training agent iteration 229 action std 0.317311 training loss actor -0.051584 and critic 0.005118
+Training agent iteration 230 action std 0.315725 training loss actor -0.051254 and critic 0.005096
+Training agent iteration 231 action std 0.314146 training loss actor -0.051253 and critic 0.005089
+Training agent iteration 232 action std 0.312575 training loss actor -0.050949 and critic 0.005045
+Training agent iteration 233 action std 0.311012 training loss actor -0.050830 and critic 0.005086
+Training agent iteration 234 action std 0.309457 training loss actor -0.050745 and critic 0.005073
+Training agent iteration 235 action std 0.307910 training loss actor -0.050561 and critic 0.005087
+Training agent iteration 236 action std 0.306371 training loss actor -0.050154 and critic 0.005048
+Training agent iteration 237 action std 0.304839 training loss actor -0.049864 and critic 0.005095
+Training agent iteration 238 action std 0.303315 training loss actor -0.050003 and critic 0.005193
+Training agent iteration 239 action std 0.301798 training loss actor -0.049407 and critic 0.005099
+Training agent iteration 240 action std 0.300289 training loss actor -0.049112 and critic 0.005030
+Training agent iteration 241 action std 0.298788 training loss actor -0.048579 and critic 0.005003
+Training agent iteration 242 action std 0.297294 training loss actor -0.048449 and critic 0.005006
+Training agent iteration 243 action std 0.295807 training loss actor -0.048266 and critic 0.005048
+Training agent iteration 244 action std 0.294328 training loss actor -0.048184 and critic 0.005017
+Training agent iteration 245 action std 0.292856 training loss actor -0.047985 and critic 0.005000
+Training agent iteration 246 action std 0.291392 training loss actor -0.047436 and critic 0.004924
+Training agent iteration 247 action std 0.289935 training loss actor -0.047116 and critic 0.004861
+Training agent iteration 248 action std 0.288486 training loss actor -0.046669 and critic 0.004817
+Training agent iteration 249 action std 0.287043 training loss actor -0.046486 and critic 0.004806
+Training agent iteration 250 action std 0.285608 training loss actor -0.046196 and critic 0.004749Evaluate 6 iterations
+
+Evaluation: Average score is 0.178 and average game_len is 1000 training loss actor -0.046196 and critic 0.004749
+
+Training agent iteration 251 action std 0.284180 training loss actor -0.045704 and critic 0.004706
+Training agent iteration 252 action std 0.282759 training loss actor -0.045650 and critic 0.004734
+Training agent iteration 253 action std 0.281345 training loss actor -0.046016 and critic 0.004877
+Training agent iteration 254 action std 0.279938 training loss actor -0.045886 and critic 0.004891
+Training agent iteration 255 action std 0.278539 training loss actor -0.045618 and critic 0.004871
+Training agent iteration 256 action std 0.277146 training loss actor -0.045600 and critic 0.004957
+Training agent iteration 257 action std 0.275760 training loss actor -0.045361 and critic 0.004873
+Training agent iteration 258 action std 0.274382 training loss actor -0.044994 and critic 0.004833
+Training agent iteration 259 action std 0.273010 training loss actor -0.044911 and critic 0.004859
+Training agent iteration 260 action std 0.271645 training loss actor -0.044694 and critic 0.004816
+Training agent iteration 261 action std 0.270286 training loss actor -0.044988 and critic 0.004928
+Training agent iteration 262 action std 0.268935 training loss actor -0.044991 and critic 0.004923
+Training agent iteration 263 action std 0.267590 training loss actor -0.045057 and critic 0.004906
+Training agent iteration 264 action std 0.266252 training loss actor -0.045075 and critic 0.004956
+Training agent iteration 265 action std 0.264921 training loss actor -0.044805 and critic 0.004945
+Training agent iteration 266 action std 0.263596 training loss actor -0.044687 and critic 0.004962
+Training agent iteration 267 action std 0.262278 training loss actor -0.044466 and critic 0.004968
+Training agent iteration 268 action std 0.260967 training loss actor -0.044291 and critic 0.004944
+Training agent iteration 269 action std 0.259662 training loss actor -0.043967 and critic 0.004961
+Training agent iteration 270 action std 0.258364 training loss actor -0.043153 and critic 0.004912
+Training agent iteration 271 action std 0.257072 training loss actor -0.042620 and critic 0.004871
+Training agent iteration 272 action std 0.255787 training loss actor -0.041876 and critic 0.004814
+Training agent iteration 273 action std 0.254508 training loss actor -0.040794 and critic 0.004609
+Training agent iteration 274 action std 0.253235 training loss actor -0.039776 and critic 0.004449
+Training agent iteration 275 action std 0.251969 training loss actor -0.039218 and critic 0.004442
+Training agent iteration 276 action std 0.250709 training loss actor -0.038310 and critic 0.004265
+Training agent iteration 277 action std 0.249456 training loss actor -0.037697 and critic 0.004226
+Training agent iteration 278 action std 0.248208 training loss actor -0.037160 and critic 0.004142
+Training agent iteration 279 action std 0.246967 training loss actor -0.036840 and critic 0.004106
+Training agent iteration 280 action std 0.245733 training loss actor -0.036272 and critic 0.004077
+Training agent iteration 281 action std 0.244504 training loss actor -0.035527 and critic 0.003949
+Training agent iteration 282 action std 0.243281 training loss actor -0.035182 and critic 0.003964
+Training agent iteration 283 action std 0.242065 training loss actor -0.034443 and critic 0.003878
+Training agent iteration 284 action std 0.240855 training loss actor -0.033906 and critic 0.003792
+Training agent iteration 285 action std 0.239650 training loss actor -0.033583 and critic 0.003746
+Training agent iteration 286 action std 0.238452 training loss actor -0.033339 and critic 0.003784
+Training agent iteration 287 action std 0.237260 training loss actor -0.032868 and critic 0.003709
+Training agent iteration 288 action std 0.236074 training loss actor -0.032537 and critic 0.003702
+Training agent iteration 289 action std 0.234893 training loss actor -0.032293 and critic 0.003683
+Training agent iteration 290 action std 0.233719 training loss actor -0.032442 and critic 0.003699
+Training agent iteration 291 action std 0.232550 training loss actor -0.032356 and critic 0.003761
+Training agent iteration 292 action std 0.231387 training loss actor -0.032505 and critic 0.003773
+Training agent iteration 293 action std 0.230230 training loss actor -0.032799 and critic 0.003879
+Training agent iteration 294 action std 0.229079 training loss actor -0.033191 and critic 0.004022
+Training agent iteration 295 action std 0.227934 training loss actor -0.033488 and critic 0.004068
+Training agent iteration 296 action std 0.226794 training loss actor -0.033825 and critic 0.004115
+Training agent iteration 297 action std 0.225660 training loss actor -0.034143 and critic 0.004190
+Training agent iteration 298 action std 0.224532 training loss actor -0.034153 and critic 0.004195
+Training agent iteration 299 action std 0.223409 training loss actor -0.034290 and critic 0.004232
+Training agent iteration 300 action std 0.222292 training loss actor -0.034563 and critic 0.004262Evaluate 6 iterations
+
+Evaluation: Average score is 0.133 and average game_len is 1000 training loss actor -0.034563 and critic 0.004262
+
+Training agent iteration 301 action std 0.221181 training loss actor -0.034675 and critic 0.004315
+Training agent iteration 302 action std 0.220075 training loss actor -0.034297 and critic 0.004242
+Training agent iteration 303 action std 0.218974 training loss actor -0.034222 and critic 0.004282
+Training agent iteration 304 action std 0.217880 training loss actor -0.033920 and critic 0.004337
+Training agent iteration 305 action std 0.216790 training loss actor -0.033450 and critic 0.004312
+Training agent iteration 306 action std 0.215706 training loss actor -0.032612 and critic 0.004211
+Training agent iteration 307 action std 0.214628 training loss actor -0.032133 and critic 0.004185
+Training agent iteration 308 action std 0.213555 training loss actor -0.032056 and critic 0.004331
+Training agent iteration 309 action std 0.212487 training loss actor -0.031913 and critic 0.004316
+Training agent iteration 310 action std 0.211424 training loss actor -0.031903 and critic 0.004432
+Training agent iteration 311 action std 0.210367 training loss actor -0.031747 and critic 0.004373
+Training agent iteration 312 action std 0.209315 training loss actor -0.031535 and critic 0.004417
+Training agent iteration 313 action std 0.208269 training loss actor -0.031149 and critic 0.004375
+Training agent iteration 314 action std 0.207227 training loss actor -0.030685 and critic 0.004283
+Training agent iteration 315 action std 0.206191 training loss actor -0.030027 and critic 0.004195
+Training agent iteration 316 action std 0.205160 training loss actor -0.029843 and critic 0.004207
+Training agent iteration 317 action std 0.204135 training loss actor -0.029791 and critic 0.004307
+Training agent iteration 318 action std 0.203114 training loss actor -0.029811 and critic 0.004381
+Training agent iteration 319 action std 0.202098 training loss actor -0.029671 and critic 0.004457
+Training agent iteration 320 action std 0.201088 training loss actor -0.029478 and critic 0.004491
+Training agent iteration 321 action std 0.200082 training loss actor -0.029345 and critic 0.004543
+Training agent iteration 322 action std 0.199082 training loss actor -0.030148 and critic 0.004677
+Training agent iteration 323 action std 0.198087 training loss actor -0.030469 and critic 0.004724
+Training agent iteration 324 action std 0.197096 training loss actor -0.031182 and critic 0.004858
+Training agent iteration 325 action std 0.196111 training loss actor -0.031988 and critic 0.004998
+Training agent iteration 326 action std 0.195130 training loss actor -0.032675 and critic 0.005011
+Training agent iteration 327 action std 0.194154 training loss actor -0.033816 and critic 0.005227
+Training agent iteration 328 action std 0.193184 training loss actor -0.034545 and critic 0.005175
+Training agent iteration 329 action std 0.192218 training loss actor -0.035143 and critic 0.005269
+Training agent iteration 330 action std 0.191257 training loss actor -0.035271 and critic 0.005214
+Training agent iteration 331 action std 0.190300 training loss actor -0.035650 and critic 0.005302
+Training agent iteration 332 action std 0.189349 training loss actor -0.036056 and critic 0.005343
+Training agent iteration 333 action std 0.188402 training loss actor -0.036356 and critic 0.005445
+Training agent iteration 334 action std 0.187460 training loss actor -0.036620 and critic 0.005499
+Training agent iteration 335 action std 0.186523 training loss actor -0.036287 and critic 0.005460
+Training agent iteration 336 action std 0.185590 training loss actor -0.035976 and critic 0.005452
+Training agent iteration 337 action std 0.184662 training loss actor -0.035472 and critic 0.005314
+Training agent iteration 338 action std 0.183739 training loss actor -0.034850 and critic 0.005208
+Training agent iteration 339 action std 0.182820 training loss actor -0.033874 and critic 0.005033
+Training agent iteration 340 action std 0.181906 training loss actor -0.033097 and critic 0.004924
+Training agent iteration 341 action std 0.180997 training loss actor -0.032492 and critic 0.004821
+Training agent iteration 342 action std 0.180092 training loss actor -0.031422 and critic 0.004721
+Training agent iteration 343 action std 0.179191 training loss actor -0.030664 and critic 0.004586
+Training agent iteration 344 action std 0.178295 training loss actor -0.029770 and critic 0.004406
+Training agent iteration 345 action std 0.177404 training loss actor -0.028922 and critic 0.004301
+Training agent iteration 346 action std 0.176517 training loss actor -0.028526 and critic 0.004339
+Training agent iteration 347 action std 0.175634 training loss actor -0.027278 and critic 0.004149
+Training agent iteration 348 action std 0.174756 training loss actor -0.025787 and critic 0.003999
+Training agent iteration 349 action std 0.173882 training loss actor -0.024362 and critic 0.003834
+Training agent iteration 350 action std 0.173013 training loss actor -0.023226 and critic 0.003693Evaluate 6 iterations
+
+Evaluation: Average score is 0.062 and average game_len is 1000 training loss actor -0.023226 and critic 0.003693
+
+Training agent iteration 351 action std 0.172148 training loss actor -0.022137 and critic 0.003514
+Training agent iteration 352 action std 0.171287 training loss actor -0.021150 and critic 0.003413
+Training agent iteration 353 action std 0.170431 training loss actor -0.020739 and critic 0.003345
+Training agent iteration 354 action std 0.169578 training loss actor -0.019876 and critic 0.003225
+Training agent iteration 355 action std 0.168731 training loss actor -0.019680 and critic 0.003211
+Training agent iteration 356 action std 0.167887 training loss actor -0.019184 and critic 0.003166
+Training agent iteration 357 action std 0.167047 training loss actor -0.018616 and critic 0.003110
+Training agent iteration 358 action std 0.166212 training loss actor -0.018249 and critic 0.003125
+Training agent iteration 359 action std 0.165381 training loss actor -0.018096 and critic 0.003115
+Training agent iteration 360 action std 0.164554 training loss actor -0.018013 and critic 0.003146
+Training agent iteration 361 action std 0.163731 training loss actor -0.017821 and critic 0.003094
+Training agent iteration 362 action std 0.162913 training loss actor -0.017553 and critic 0.003047
+Training agent iteration 363 action std 0.162098 training loss actor -0.017589 and critic 0.003107
+Training agent iteration 364 action std 0.161288 training loss actor -0.017307 and critic 0.003137
+Training agent iteration 365 action std 0.160481 training loss actor -0.017380 and critic 0.003160
+Training agent iteration 366 action std 0.159679 training loss actor -0.017230 and critic 0.003166
+Training agent iteration 367 action std 0.158881 training loss actor -0.017339 and critic 0.003183
+Training agent iteration 368 action std 0.158086 training loss actor -0.017799 and critic 0.003255
+Training agent iteration 369 action std 0.157296 training loss actor -0.018363 and critic 0.003346
+Training agent iteration 370 action std 0.156509 training loss actor -0.019087 and critic 0.003485
+Training agent iteration 371 action std 0.155727 training loss actor -0.019281 and critic 0.003538
+Training agent iteration 372 action std 0.154948 training loss actor -0.019360 and critic 0.003545
+Training agent iteration 373 action std 0.154173 training loss actor -0.019210 and critic 0.003493
+Training agent iteration 374 action std 0.153402 training loss actor -0.019732 and critic 0.003584
+Training agent iteration 375 action std 0.152635 training loss actor -0.019866 and critic 0.003590
+Training agent iteration 376 action std 0.151872 training loss actor -0.019961 and critic 0.003609
+Training agent iteration 377 action std 0.151113 training loss actor -0.020059 and critic 0.003631
+Training agent iteration 378 action std 0.150357 training loss actor -0.019980 and critic 0.003570
+Training agent iteration 379 action std 0.149606 training loss actor -0.019877 and critic 0.003598
+Training agent iteration 380 action std 0.148857 training loss actor -0.019486 and critic 0.003514
+Training agent iteration 381 action std 0.148113 training loss actor -0.019469 and critic 0.003551
+Training agent iteration 382 action std 0.147373 training loss actor -0.019229 and critic 0.003518
+Training agent iteration 383 action std 0.146636 training loss actor -0.018766 and critic 0.003516
+Training agent iteration 384 action std 0.145903 training loss actor -0.018365 and critic 0.003459
+Training agent iteration 385 action std 0.145173 training loss actor -0.017770 and critic 0.003393
+Training agent iteration 386 action std 0.144447 training loss actor -0.017453 and critic 0.003359
+Training agent iteration 387 action std 0.143725 training loss actor -0.017188 and critic 0.003330
+Training agent iteration 388 action std 0.143006 training loss actor -0.016494 and critic 0.003261
+Training agent iteration 389 action std 0.142291 training loss actor -0.015833 and critic 0.003227
+Training agent iteration 390 action std 0.141580 training loss actor -0.015148 and critic 0.003160
+Training agent iteration 391 action std 0.140872 training loss actor -0.014982 and critic 0.003144
+Training agent iteration 392 action std 0.140168 training loss actor -0.014665 and critic 0.003131
+Training agent iteration 393 action std 0.139467 training loss actor -0.014141 and critic 0.003056
+Training agent iteration 394 action std 0.138769 training loss actor -0.013308 and critic 0.002943
+Training agent iteration 395 action std 0.138076 training loss actor -0.012719 and critic 0.002881
+Training agent iteration 396 action std 0.137385 training loss actor -0.012201 and critic 0.002825
+Training agent iteration 397 action std 0.136698 training loss actor -0.012159 and critic 0.002816
+Training agent iteration 398 action std 0.136015 training loss actor -0.012454 and critic 0.002921
+Training agent iteration 399 action std 0.135335 training loss actor -0.012781 and critic 0.002980
+Training agent iteration 400 action std 0.134658 training loss actor -0.012795 and critic 0.003018Evaluate 6 iterations
+
+Evaluation: Average score is 0.090 and average game_len is 1000 training loss actor -0.012795 and critic 0.003018
+
+Training agent iteration 401 action std 0.133985 training loss actor -0.012560 and critic 0.003000
+Training agent iteration 402 action std 0.133315 training loss actor -0.012319 and critic 0.002954
+Training agent iteration 403 action std 0.132648 training loss actor -0.012114 and critic 0.002867
+Training agent iteration 404 action std 0.131985 training loss actor -0.011955 and critic 0.002829
+Training agent iteration 405 action std 0.131325 training loss actor -0.011920 and critic 0.002839
+Training agent iteration 406 action std 0.130668 training loss actor -0.011630 and critic 0.002788
+Training agent iteration 407 action std 0.130015 training loss actor -0.011705 and critic 0.002871
+Training agent iteration 408 action std 0.129365 training loss actor -0.011859 and critic 0.002977
+Training agent iteration 409 action std 0.128718 training loss actor -0.011502 and critic 0.002882
+Training agent iteration 410 action std 0.128075 training loss actor -0.011196 and critic 0.002844
+Training agent iteration 411 action std 0.127434 training loss actor -0.010641 and critic 0.002777
+Training agent iteration 412 action std 0.126797 training loss actor -0.010022 and critic 0.002673
+Training agent iteration 413 action std 0.126163 training loss actor -0.009464 and critic 0.002618
+Training agent iteration 414 action std 0.125532 training loss actor -0.009393 and critic 0.002631
+Training agent iteration 415 action std 0.124905 training loss actor -0.009146 and critic 0.002614
+Training agent iteration 416 action std 0.124280 training loss actor -0.008887 and critic 0.002564
+Training agent iteration 417 action std 0.123659 training loss actor -0.008658 and critic 0.002532
+Training agent iteration 418 action std 0.123040 training loss actor -0.008142 and critic 0.002458
+Training agent iteration 419 action std 0.122425 training loss actor -0.007849 and critic 0.002438
+Training agent iteration 420 action std 0.121813 training loss actor -0.007956 and critic 0.002448
+Training agent iteration 421 action std 0.121204 training loss actor -0.007784 and critic 0.002389
+Training agent iteration 422 action std 0.120598 training loss actor -0.008047 and critic 0.002498
+Training agent iteration 423 action std 0.119995 training loss actor -0.008053 and critic 0.002504
+Training agent iteration 424 action std 0.119395 training loss actor -0.008000 and critic 0.002483
+Training agent iteration 425 action std 0.118798 training loss actor -0.008163 and critic 0.002545
+Training agent iteration 426 action std 0.118204 training loss actor -0.007906 and critic 0.002508
+Training agent iteration 427 action std 0.117613 training loss actor -0.007497 and critic 0.002390
+Training agent iteration 428 action std 0.117025 training loss actor -0.007218 and critic 0.002323
+Training agent iteration 429 action std 0.116440 training loss actor -0.007043 and critic 0.002356
+Training agent iteration 430 action std 0.115858 training loss actor -0.006773 and critic 0.002286
+Training agent iteration 431 action std 0.115278 training loss actor -0.006613 and critic 0.002266
+Training agent iteration 432 action std 0.114702 training loss actor -0.006635 and critic 0.002266
+Training agent iteration 433 action std 0.114128 training loss actor -0.006862 and critic 0.002364
+Training agent iteration 434 action std 0.113558 training loss actor -0.006757 and critic 0.002334
+Training agent iteration 435 action std 0.112990 training loss actor -0.006737 and critic 0.002325
+Training agent iteration 436 action std 0.112425 training loss actor -0.006870 and critic 0.002363
+Training agent iteration 437 action std 0.111863 training loss actor -0.006640 and critic 0.002330
+Training agent iteration 438 action std 0.111304 training loss actor -0.006419 and critic 0.002282
+Training agent iteration 439 action std 0.110747 training loss actor -0.006024 and critic 0.002224
+Training agent iteration 440 action std 0.110193 training loss actor -0.005881 and critic 0.002219
+Training agent iteration 441 action std 0.109642 training loss actor -0.005983 and critic 0.002286
+Training agent iteration 442 action std 0.109094 training loss actor -0.005693 and critic 0.002222
+Training agent iteration 443 action std 0.108549 training loss actor -0.005339 and critic 0.002166
+Training agent iteration 444 action std 0.108006 training loss actor -0.005053 and critic 0.002146
+Training agent iteration 445 action std 0.107466 training loss actor -0.004579 and critic 0.002057
+Training agent iteration 446 action std 0.106929 training loss actor -0.004622 and critic 0.002089
+Training agent iteration 447 action std 0.106394 training loss actor -0.004504 and critic 0.002099
+Training agent iteration 448 action std 0.105862 training loss actor -0.004206 and critic 0.002023
+Training agent iteration 449 action std 0.105333 training loss actor -0.004292 and critic 0.002007
+Training agent iteration 450 action std 0.104806 training loss actor -0.004361 and critic 0.002021Evaluate 6 iterations
+
+Evaluation: Average score is 0.094 and average game_len is 1000 training loss actor -0.004361 and critic 0.002021
+
+Training agent iteration 451 action std 0.104282 training loss actor -0.004312 and critic 0.002015
+Training agent iteration 452 action std 0.103761 training loss actor -0.004070 and critic 0.001968
+Training agent iteration 453 action std 0.103242 training loss actor -0.003834 and critic 0.001864
+Training agent iteration 454 action std 0.102726 training loss actor -0.003523 and critic 0.001864
+Training agent iteration 455 action std 0.102212 training loss actor -0.003454 and critic 0.001837
+Training agent iteration 456 action std 0.101701 training loss actor -0.003227 and critic 0.001795
+Training agent iteration 457 action std 0.101192 training loss actor -0.002953 and critic 0.001772
+Training agent iteration 458 action std 0.100686 training loss actor -0.002870 and critic 0.001773
+Training agent iteration 459 action std 0.100183 training loss actor -0.002831 and critic 0.001743
+Training agent iteration 460 action std 0.100000 training loss actor -0.002879 and critic 0.001746
+Training agent iteration 461 action std 0.100000 training loss actor -0.003189 and critic 0.001786
+Training agent iteration 462 action std 0.100000 training loss actor -0.003410 and critic 0.001813
+Training agent iteration 463 action std 0.100000 training loss actor -0.003563 and critic 0.001846
+Training agent iteration 464 action std 0.100000 training loss actor -0.003715 and critic 0.001893
+Training agent iteration 465 action std 0.100000 training loss actor -0.003776 and critic 0.001875
+Training agent iteration 466 action std 0.100000 training loss actor -0.003822 and critic 0.001902
+Training agent iteration 467 action std 0.100000 training loss actor -0.004096 and critic 0.001937
+Training agent iteration 468 action std 0.100000 training loss actor -0.004204 and critic 0.001978
+Training agent iteration 469 action std 0.100000 training loss actor -0.004529 and critic 0.002025
+Training agent iteration 470 action std 0.100000 training loss actor -0.004538 and critic 0.002096
+Training agent iteration 471 action std 0.100000 training loss actor -0.004628 and critic 0.002113
+Training agent iteration 472 action std 0.100000 training loss actor -0.004960 and critic 0.002191
+Training agent iteration 473 action std 0.100000 training loss actor -0.005197 and critic 0.002261
+Training agent iteration 474 action std 0.100000 training loss actor -0.005521 and critic 0.002283
+Training agent iteration 475 action std 0.100000 training loss actor -0.005616 and critic 0.002324
+Training agent iteration 476 action std 0.100000 training loss actor -0.005937 and critic 0.002384
+Training agent iteration 477 action std 0.100000 training loss actor -0.006200 and critic 0.002441
+Training agent iteration 478 action std 0.100000 training loss actor -0.006473 and critic 0.002464
+Training agent iteration 479 action std 0.100000 training loss actor -0.006892 and critic 0.002547
+Training agent iteration 480 action std 0.100000 training loss actor -0.007031 and critic 0.002583
+Training agent iteration 481 action std 0.100000 training loss actor -0.006977 and critic 0.002576
+Training agent iteration 482 action std 0.100000 training loss actor -0.006708 and critic 0.002528
+Training agent iteration 483 action std 0.100000 training loss actor -0.006666 and critic 0.002516
+Training agent iteration 484 action std 0.100000 training loss actor -0.006402 and critic 0.002485
+Training agent iteration 485 action std 0.100000 training loss actor -0.006299 and critic 0.002484
+Training agent iteration 486 action std 0.100000 training loss actor -0.005983 and critic 0.002392
+Training agent iteration 487 action std 0.100000 training loss actor -0.005540 and critic 0.002330
+Training agent iteration 488 action std 0.100000 training loss actor -0.005368 and critic 0.002281
+Training agent iteration 489 action std 0.100000 training loss actor -0.004983 and critic 0.002224
+Training agent iteration 490 action std 0.100000 training loss actor -0.004731 and critic 0.002149
+Training agent iteration 491 action std 0.100000 training loss actor -0.004611 and critic 0.002139
+Training agent iteration 492 action std 0.100000 training loss actor -0.004276 and critic 0.002058
+Training agent iteration 493 action std 0.100000 training loss actor -0.004176 and critic 0.002056
+Training agent iteration 494 action std 0.100000 training loss actor -0.004108 and critic 0.002087
+Training agent iteration 495 action std 0.100000 training loss actor -0.004206 and critic 0.002098
+Training agent iteration 496 action std 0.100000 training loss actor -0.004007 and critic 0.002071
+Training agent iteration 497 action std 0.100000 training loss actor -0.003921 and critic 0.002051
+Training agent iteration 498 action std 0.100000 training loss actor -0.003561 and critic 0.002038
+Training agent iteration 499 action std 0.100000 training loss actor -0.003120 and critic 0.001939
+Training agent iteration 500 action std 0.100000 training loss actor -0.002666 and critic 0.001857Evaluate 6 iterations
+
+Evaluation: Average score is 0.079 and average game_len is 1000 training loss actor -0.002666 and critic 0.001857
+Environment solved in 500 iterations!	Average Score: 0.08
+saving models ...

@@ -75,7 +75,6 @@ class PPOAgent():
         self.episodic = episodic
         self.n_episode = 0
         self.n_steps = 0
-
         # Actor Network (w/ Target Network) determinstic
         self.actor_local = model.Actor(state_size, action_size, random_seed, fc_units=model_param["actor_fc_units"]).to(self.device)
         self.actor_target = model.Actor(state_size, action_size, random_seed, fc_units=model_param["actor_fc_units"]).to(self.device)
@@ -183,6 +182,7 @@ class PPOAgent():
             final_value = self._value_estimate(final_state, final_action)
             done_index = done == True
             final_value[done_index] = 0
+        # print(rewards, rewards[0].shape, final_value.shape)
         rewards = self._discount_reward(rewards, final_value)
         self.n_steps += 1
 
@@ -194,7 +194,6 @@ class PPOAgent():
                     self.memory.add(state[i], action[i], reward[i], next_state[i], done[i])
             else:
                 self.memory.add(state, action, reward, next_state, done)
-
 
     def _discount_reward(self, rewards, final_value):
         discounted_r = np.zeros_like(rewards)
@@ -287,7 +286,7 @@ class PPOAgent():
         for target_param, local_param in zip(target_model.parameters(), local_model.parameters()):
             target_param.data.copy_(tau*local_param.data + (1.0-tau)*target_param.data)
 
-    def evaluation(self, env=None, eval_episodes=100):
+    def evaluation(self, env=None, eval_episodes=100, action_std=0.01):
         '''
         Evaluate the agent for given number of episodes
         '''
@@ -304,22 +303,25 @@ class PPOAgent():
         for i in range(n_iterations):
             rewards_i = []
             state = env.reset()
-            action = self._stochastic_act(state, action_std=0.01)
+            action = self._stochastic_act(state, action_std=action_std)
             state, reward, done, info = env.step(action)
             rewards_i.append(reward)
             game_len = 0
             while not done.all():
-                action = self._stochastic_act(state, action_std=0.01)
+                action = self._stochastic_act(state, action_std=action_std)
                 next_state, reward, done, info = env.step(action)
                 state = next_state
                 rewards_i.append(reward)
+                # print("iter", i, "reward", reward)
                 game_len += 1
             rewards.append(rewards_i)
             game_lens.append(game_len)
             rewards_i = np.array(rewards_i)
+            # print("reward_i shape", rewards_i.shape)
             rewards_i_sum = np.sum(rewards_i, axis=0)
+            # print("reward_i_sum shape", rewards_i_sum.shape)
             scores.append(np.mean(rewards_i_sum))
-        print("Score is", scores)
+        # print("Score is", scores)
         self.env_state = env.reset()
         return np.mean(scores), rewards, game_lens
 
