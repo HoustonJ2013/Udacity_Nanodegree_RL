@@ -1,4 +1,4 @@
-## This PPO is designe for continuous control 
+## This PPO is designed for continuous control 
 ## It is implemented for Unity Reacher-V2, which is a version of reacher that simplify the parallelization 
 ## Current implementation support both episodic and online updates
 ## For episodic version, run the policy for a whole game and learn
@@ -58,7 +58,7 @@ class PPOAgent():
         self.action_size = action_size
         self.done_penalty=None
         self.batch_size = batch_size
-        self.roll_out_n_steps = 1 ## 
+        self.roll_out_n_steps = T_step
         self.T_step = T_step
         self.max_steps = max_t
         self.gamma = gamma
@@ -124,16 +124,16 @@ class PPOAgent():
     def _deterministic_act(self, state):
         """Returns actions for given state as per current policy."""
         
-        state = torch.from_numpy(state).float().to(torch.device("cpu")) ## Use only CPU to roll out play
+        state = torch.from_numpy(state).float().to(self.device) ## Use only CPU to roll out play
         self.actor_local.eval()
         with torch.no_grad():
             action = self.actor_local(state)
         self.actor_local.train()
-        return action
+        return torch.clamp(action, -1, 1)
 
     def _value_estimate(self, state, action):
-        state = torch.from_numpy(state).float().to(torch.device("cpu"))
-        action = torch.from_numpy(action).float().to(torch.device("cpu"))
+        state = torch.from_numpy(state).float().to(self.device)
+        action = torch.from_numpy(action).float().to(self.device)
         self.critic_local.eval()
         with torch.no_grad():
             value = self.critic_local(state, action).cpu().data.numpy()
@@ -144,7 +144,7 @@ class PPOAgent():
         action = self._deterministic_act(state)
         x_dist = self.actor_dist(action, action_std)
         action_s = x_dist.sample().cpu().data.numpy()
-        return action_s
+        return np.clip(action_s, -1, 1)
 
     def _interact_n_step(self, action_std):
         if (self.max_steps is not None) and (self.n_steps >= self.max_steps):
@@ -198,7 +198,7 @@ class PPOAgent():
 
     def _discount_reward(self, rewards, final_value):
         discounted_r = np.zeros_like(rewards)
-        running_add = final_value
+        running_add = final_value.flatten()
         for t in reversed(range(0, len(rewards))):
             running_add = running_add * self.gamma + rewards[t]
             discounted_r[t] = running_add
@@ -287,7 +287,7 @@ class PPOAgent():
         for target_param, local_param in zip(target_model.parameters(), local_model.parameters()):
             target_param.data.copy_(tau*local_param.data + (1.0-tau)*target_param.data)
 
-    def evaluation(self, eval_episodes=100):
+    def evaluation(self, env=None, eval_episodes=100):
         '''
         Evaluate the agent for given number of episodes
         '''
@@ -297,16 +297,20 @@ class PPOAgent():
         state = self.env.reset()
         n_agents = state.shape[0]
         n_iterations = int(eval_episodes / float(n_agents)) + 1
+        print("Evaluate %i iterations"%(n_iterations))
+        if env is None:
+            env = self.env
+
         for i in range(n_iterations):
             rewards_i = []
-            state = self.env.reset()
+            state = env.reset()
             action = self._stochastic_act(state, action_std=0.01)
-            state, reward, done, info = self.env.step(action)
+            state, reward, done, info = env.step(action)
             rewards_i.append(reward)
             game_len = 0
             while not done.all():
                 action = self._stochastic_act(state, action_std=0.01)
-                next_state, reward, done, info = self.env.step(action)
+                next_state, reward, done, info = env.step(action)
                 state = next_state
                 rewards_i.append(reward)
                 game_len += 1
@@ -315,42 +319,43 @@ class PPOAgent():
             rewards_i = np.array(rewards_i)
             rewards_i_sum = np.sum(rewards_i, axis=0)
             scores.append(np.mean(rewards_i_sum))
-        self.env_state = self.env.reset()
+        print("Score is", scores)
+        self.env_state = env.reset()
         return np.mean(scores), rewards, game_lens
 
-class PPOReplayBuffer:
+# class PPOReplayBuffer:
 
-    def __init__(self, device):
-        """Initialize a ReplayBuffer object.
+#     def __init__(self, device):
+#         """Initialize a ReplayBuffer object.
 
-        Params
-        ======
-        """
-        self.memory = []  
-        self.experience = namedtuple("Experience", field_names=["state", "action", "reward", "next_state", "done"])
-        self.device = device
-        random.seed(seed)
+#         Params
+#         ======
+#         """
+#         self.memory = []  
+#         self.experience = namedtuple("Experience", field_names=["state", "action", "reward", "next_state", "done"])
+#         self.device = device
+#         random.seed(seed)
     
-    def add(self, state, action, reward, next_state, done):
-        """Add a new experience to memory."""
-        e = self.experience(state, action, reward, next_state, done)
-        self.memory.append(e)
+#     def add(self, state, action, reward, next_state, done):
+#         """Add a new experience to memory."""
+#         e = self.experience(state, action, reward, next_state, done)
+#         self.memory.append(e)
     
-    def all(self):
-        """Randomly sample a batch of experiences from memory."""
-        experiences = self.memory
+#     def all(self):
+#         """Randomly sample a batch of experiences from memory."""
+#         experiences = self.memory
 
-        states = torch.from_numpy(np.vstack([e.state for e in experiences if e is not None])).float().to(self.device)
-        actions = torch.from_numpy(np.vstack([e.action for e in experiences if e is not None])).float().to(self.device)
-        rewards = torch.from_numpy(np.vstack([e.reward for e in experiences if e is not None])).float().to(self.device)
-        next_states = torch.from_numpy(np.vstack([e.next_state for e in experiences if e is not None])).float().to(self.device)
-        dones = torch.from_numpy(np.vstack([e.done for e in experiences if e is not None]).astype(np.uint8)).float().to(self.device)
-        return (states, actions, rewards, next_states, dones)
+#         states = torch.from_numpy(np.vstack([e.state for e in experiences if e is not None])).float().to(self.device)
+#         actions = torch.from_numpy(np.vstack([e.action for e in experiences if e is not None])).float().to(self.device)
+#         rewards = torch.from_numpy(np.vstack([e.reward for e in experiences if e is not None])).float().to(self.device)
+#         next_states = torch.from_numpy(np.vstack([e.next_state for e in experiences if e is not None])).float().to(self.device)
+#         dones = torch.from_numpy(np.vstack([e.done for e in experiences if e is not None]).astype(np.uint8)).float().to(self.device)
+#         return (states, actions, rewards, next_states, dones)
 
-    def reset(self):
-        self.memory = []
+#     def reset(self):
+#         self.memory = []
 
-    def __len__(self):
-        """Return the current size of internal memory."""
-        return len(self.memory)
+#     def __len__(self):
+#         """Return the current size of internal memory."""
+#         return len(self.memory)
 

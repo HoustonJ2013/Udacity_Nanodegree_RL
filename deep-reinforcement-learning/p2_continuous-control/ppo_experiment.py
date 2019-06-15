@@ -72,15 +72,15 @@ def main(args):
                 model_param=model_param, 
                 random_seed=42,
                 batch_size=args.batch_size,
-                T_step=1, 
+                T_step=4, 
                 clip_param=0.2,
-                K_epoch=1,
-                episodic=True,
+                K_epoch=5,
                 gamma=args.gamma,
                 tau=args.tau, 
                 lr_actor=args.lr_actor,
                 lr_critic=args.lr_critic, 
                 weight_decay=args.weight_decay,
+                episodic=True,
                 device=device, 
                 loss=args.loss,
                 )
@@ -101,7 +101,7 @@ def main(args):
         action_std = max(action_std * args.std_decay, args.std_end)
         agent.run_policy(action_std=action_std, n_step=20)
         ## Learng and updates 
-        agent.learn(batch_size=256, k_epoch=20)
+        agent.learn()
 
         print("\nTraining agent iteration %i action std %f training loss actor %f and critic %f"%(i_iter, 
                                                                                     action_std, 
@@ -140,30 +140,30 @@ if __name__ == "__main__":
     parser.add_argument('--lr', type=float, default=5e-4)
     parser.add_argument('--lr_actor', type=float, default=1e-3)
     parser.add_argument('--lr_critic', type=float, default=5e-3)
-    parser.add_argument('--actor_fc_units', type=int, default=5)
-    parser.add_argument('--critic_fc_units1', type=int, default=2)
-    parser.add_argument('--critic_fc_units2', type=int, default=5)
-    parser.add_argument('--critic_fc_units3', type=int, default=5)
+    parser.add_argument('--actor_fc_units', type=int, default=128)
+    parser.add_argument('--critic_fc_units1', type=int, default=64)
+    parser.add_argument('--critic_fc_units2', type=int, default=128)
+    parser.add_argument('--critic_fc_units3', type=int, default=64)
     parser.add_argument('--weight_decay', type=float, default=0)
     parser.add_argument('--update_every', type=int, default=1)
-    parser.add_argument('--score_threshold', type=int, default=200)
+    parser.add_argument('--score_threshold', type=int, default=13)
     parser.add_argument('--score_window_size', type=int, default=100)
 
     ## Environment related parameters
-    parser.add_argument('--env', type=str, default="MountainCarContinuous-v0")
+    parser.add_argument('--env', type=str, default="Reacher_unity_v2")
     # parser.add_argument('--agent', type=str, default="ddpg")
-    parser.add_argument('--n_iterations', type=int, default=200,
+    parser.add_argument('--n_iterations', type=int, default=20,
                         help='No. of iterations to train')
-    parser.add_argument('--evaluate_n_iter', type=int, default=50,
+    parser.add_argument('--evaluate_n_iter', type=int, default=5,
                         help='Evaluate the agent every n iteration')
-    parser.add_argument('--std_start', type=float, default=1.0)
+    parser.add_argument('--std_start', type=float, default=0.5)
     parser.add_argument('--std_end', type=float, default=0.1)
     parser.add_argument('--std_decay', type=float, default=0.99)
     parser.add_argument('--max_t', type=int, default=2000)
     parser.add_argument('--loss', type=str, default="mse")
 
     parser.add_argument('--workers', type=int, default=8)
-    parser.add_argument('--device', type=str, default="cpu")
+    parser.add_argument('--device', type=str, default="gpu")
 
 
     parser.add_argument('--testname', type=str, default="")
