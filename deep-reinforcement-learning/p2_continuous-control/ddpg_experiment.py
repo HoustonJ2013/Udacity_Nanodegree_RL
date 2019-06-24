@@ -14,11 +14,21 @@ import torch.optim as optim
 import pickle
 from time import gmtime, strftime
 
+
+def load_memory(replay_buffer_obj, loaded_pickle_memory):
+    experience = namedtuple("Experience", field_names=["state", "action", "reward", "next_state", "done"])
+    for item in loaded_pickle_memory:
+        item_tf = experience(item["state"], item["action"], item["reward"], item["next_state"], item["done"])
+        replay_buffer_obj.memory.append(item_tf)
+    return replay_buffer_obj
+
+
 def main(args):
 
     ## Support two environment, LunarLander was used to debug 
     if args.env == "Reacher_unity_v1":
         model_param = {"actor_fc_units": args.actor_fc_units, 
+                    "actor_fc_units2": args.actor_fc_units2, 
                     "critic_fc_units1": args.critic_fc_units1, 
                     "critic_fc_units2": args.critic_fc_units2, 
                     "critic_fc_units3": args.critic_fc_units3}
@@ -28,6 +38,7 @@ def main(args):
 
     elif args.env == "Reacher_unity_v2":
         model_param = {"actor_fc_units": args.actor_fc_units, 
+                    "actor_fc_units2": args.actor_fc_units2, 
                     "critic_fc_units1": args.critic_fc_units1, 
                     "critic_fc_units2": args.critic_fc_units2, 
                     "critic_fc_units3": args.critic_fc_units3}
@@ -36,7 +47,8 @@ def main(args):
         action_size = env.action_size
 
     elif args.env == "MountainCarContinuous-v0":  ## LunarLanderContinuous-v2
-        model_param = {"actor_fc_units": args.actor_fc_units, 
+        model_param = {"actor_fc_units": args.actor_fc_units,
+                    "actor_fc_units2": args.actor_fc_units2,  
                     "critic_fc_units1": args.critic_fc_units1, 
                     "critic_fc_units2": args.critic_fc_units2, 
                     "critic_fc_units3": args.critic_fc_units3}
@@ -88,6 +100,15 @@ def main(args):
                 loss=args.loss,
                 )
 
+    if args.retrain: 
+        agent.actor_local.load_state_dict(torch.load(args.actor_weight))
+        agent.actor_target.load_state_dict(torch.load(args.actor_weight))
+        agent.critic_local.load_state_dict(torch.load(args.critic_weight))
+        agent.critic_target.load_state_dict(torch.load(args.critic_weight))
+        with open(args.replay_buffer_pickle, "rb") as file:
+            replay_buffer_pickle = pickle.load(file)
+        load_memory(agent.memory, replay_buffer_pickle)
+
     ## Train the agent
     n_episodes = args.num_episodes
     scores = []                        # list containing scores from each episode
@@ -96,10 +117,13 @@ def main(args):
 
     ## Current time string 
     now_string = strftime("%Y_%m_%d_%H_%M_%S", gmtime()) 
+    actor_lr_start = args.lr_actor
+    critic_lr_start = args.lr_critic
 
-    for i_episode in range(1, n_episodes+1):
+    for i_episode in range(args.restart_iter, args.restart_iter + n_episodes):
         state = env.reset()
         agent.n_episode = i_episode
+
         score = 0
         game_len = 0
         for t in range(args.max_t):
@@ -127,6 +151,13 @@ def main(args):
                 np.mean(agent.actor_running_loss)))
             check_point_name = args.env + "_episodes_" + str(i_episode) + "_score_" + str(np.mean(scores_window)) + now_string + \
                 "_" +  args.testname + "_checkpoint.pth"
+            if args.save_replay:
+                print("saving replay buffer ...")
+                replay_buffer_name = args.env + now_string + "_replay_buffer_iter" + str(i_episode) + args.testname
+                replay_buffer = [tem_._asdict() for tem_ in list(agent.memory.memory)]
+                with open("models/" + replay_buffer_name, "wb") as pickle_file:
+                    pickle.dump(replay_buffer, pickle_file)
+
             torch.save(agent.actor_local.state_dict(), "models/actor_iter" + str(i_episode) + "_" + check_point_name)
             torch.save(agent.critic_local.state_dict(), "models/critic_iter" + str(i_episode) + "_" + check_point_name)
         if np.mean(scores_window)>=args.score_threshold or i_episode == n_episodes:
@@ -158,12 +189,19 @@ if __name__ == "__main__":
     ## Agent related parameters
     parser.add_argument('--per', action="store_true", default=False)
     parser.add_argument('--save_replay', action="store_true", default=False)
+    parser.add_argument('--retrain', action="store_true", default=False)
+    parser.add_argument('--actor_weight', type=str, default="")
+    parser.add_argument('--critic_weight', type=str, default="")
+    parser.add_argument('--replay_buffer_pickle', type=str, default="")
+    parser.add_argument('--restart_iter', type=int, default=1)
+    
     parser.add_argument('--buffer_size', type=int, default=int(1e6))
     parser.add_argument('--batch_size', type=int, default=128)
     parser.add_argument('--gamma', type=float, default=0.99)
     parser.add_argument('--tau', type=float, default=1e-3)
     parser.add_argument('--lr', type=float, default=5e-4)
     parser.add_argument('--actor_fc_units', type=int, default=128)
+    parser.add_argument('--actor_fc_units2', type=int, default=64)
     parser.add_argument('--critic_fc_units1', type=int, default=64)
     parser.add_argument('--critic_fc_units2', type=int, default=128)
     parser.add_argument('--critic_fc_units3', type=int, default=64)
@@ -175,10 +213,10 @@ if __name__ == "__main__":
     parser.add_argument('--score_window_size', type=int, default=100)
 
     ## Environment related parameters
-    parser.add_argument('--env', type=str, default="Reacher_unity")
+    parser.add_argument('--env', type=str, default="Reacher_unity_v1")
     # parser.add_argument('--agent', type=str, default="ddpg")
     parser.add_argument('--n_episode_bf_train', type=int, default=0)
-    parser.add_argument('--n_episode_stop_explore', type=int, default=1000)
+    parser.add_argument('--n_episode_stop_explore', type=int, default=2000)
     parser.add_argument('--num_episodes', type=int, default=2000,
                         help='no. of epoches to train the model')
     parser.add_argument('--max_t', type=int, default=2000)

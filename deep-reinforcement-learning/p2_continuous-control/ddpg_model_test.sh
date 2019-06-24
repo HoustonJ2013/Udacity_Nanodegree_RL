@@ -1,0 +1,17 @@
+### Test for update_every
+#python ddpg_experiment.py --save_replay --env Reacher_unity_v1 --batch_size 1028 --n_episode_bf_train 0 --lr_actor 1e-4 --lr_critic 5e-4 --num_episodes 400 --update_every 2 --actor_fc_units 128 --actor_fc_units2 64 --device gpu  --testname model_2_test3_update2 >  logs/ddpg_reacher_model_2_test3_update2
+#python ddpg_experiment.py --save_replay --env Reacher_unity_v1 --batch_size 1028 --n_episode_bf_train 0 --lr_actor 1e-4 --lr_critic 5e-4 --num_episodes 400 --update_every 4 --actor_fc_units 128 --actor_fc_units2 64 --device gpu  --testname model_2_test3_update4 >  logs/ddpg_reacher_model_2_test3_update4
+#python ddpg_experiment.py --save_replay --env Reacher_unity_v1 --batch_size 1028 --n_episode_bf_train 0 --lr_actor 1e-4 --lr_critic 5e-4 --num_episodes 400 --update_every 8 --actor_fc_units 128 --actor_fc_units2 64 --device gpu  --testname model_2_test3_update8 >  logs/ddpg_reacher_model_2_test3_update8
+#python ddpg_experiment.py --save_replay --env Reacher_unity_v1 --batch_size 1028 --n_episode_bf_train 0 --lr_actor 1e-4 --lr_critic 5e-4 --num_episodes 400 --update_every 16 --actor_fc_units 128 --actor_fc_units2 64 --device gpu  --testname model_2_test3_update16 >  logs/ddpg_reacher_model_2_test3_update16
+
+### Test for learning rate
+#python ddpg_experiment.py --save_replay --env Reacher_unity_v1 --batch_size 1028 --n_episode_bf_train 0 --lr_actor 1e-4 --lr_critic 5e-4 --num_episodes 400 --update_every 4 --actor_fc_units 128 --actor_fc_units2 64 --device gpu  --testname model_2_test3_update4 >  logs/ddpg_reacher_model_2_test3_update4
+#python ddpg_experiment.py --save_replay --env Reacher_unity_v1 --batch_size 1028 --n_episode_bf_train 0 --lr_actor 1e-4 --lr_critic 1e-3 --num_episodes 400 --update_every 4 --actor_fc_units 128 --actor_fc_units2 64 --device gpu  --testname ddpg_reacher_model_2_t3_lr_1e-3 >  logs/ddpg_reacher_model_2_t3_lr_1e-3
+
+### Long run test
+#python ddpg_experiment.py --save_replay --env Reacher_unity_v1 --batch_size 1028 --n_episode_bf_train 0 --lr_actor 1e-4 --lr_critic 1e-3 --num_episodes 5000 --update_every 4 --actor_fc_units 128 --actor_fc_units2 64 --device gpu  --testname ddpg_reacher_model_2_lr_1e-3 >  logs/ddpg_reacher_model_2_lr_1e-3
+
+### Retrain 
+python ddpg_experiment.py --save_replay --retrain --actor_weight models/actor_iter1500_Reacher_unity_v1_episodes_1500_score_4.9535998892784112019_06_22_18_29_11_ddpg_reacher_model_2_lr_1e-3_checkpoint.pth --critic_weight models/critic_iter1500_Reacher_unity_v1_episodes_1500_score_4.9535998892784112019_06_22_18_29_11_ddpg_reacher_model_2_lr_1e-3_checkpoint.pth --replay_buffer_pickle models/Reacher_unity_v12019_06_22_18_29_11_replay_buffer_iter1500ddpg_reacher_model_2_lr_1e-3 --restart_iter 1500 --env Reacher_unity_v1 --batch_size 1028 --n_episode_bf_train 0 --lr_actor 1e-4 --lr_critic 1e-3 --num_episodes 5000 --update_every 4 --actor_fc_units 128 --actor_fc_units2 64 --device gpu  --testname ddpg_reacher_model_2_lr_1e-3_retart1500 >  logs/ddpg_reacher_model_2_lr_1e-3_restart_1500
+
+

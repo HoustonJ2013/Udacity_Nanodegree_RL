@@ -68,8 +68,10 @@ class Agent():
         self.update_every = update_every
 
         # Actor Network (w/ Target Network)
-        self.actor_local = model.Actor(state_size, action_size, random_seed, fc_units=model_param["actor_fc_units"]).to(self.device)
-        self.actor_target = model.Actor(state_size, action_size, random_seed, fc_units=model_param["actor_fc_units"]).to(self.device)
+        self.actor_local = model.Actor(state_size, action_size, random_seed, fc_units=model_param["actor_fc_units"], 
+                                                                            fc_units2=model_param["actor_fc_units2"]).to(self.device)
+        self.actor_target = model.Actor(state_size, action_size, random_seed, fc_units=model_param["actor_fc_units"], 
+                                                                            fc_units2=model_param["actor_fc_units2"]).to(self.device)
 
         ## Check if local and target start with same weights
         for target_param, local_param in zip(self.actor_local.parameters(), self.actor_target.parameters()):

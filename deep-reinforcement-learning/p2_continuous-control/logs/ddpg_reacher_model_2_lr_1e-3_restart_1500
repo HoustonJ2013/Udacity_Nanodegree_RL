@@ -1,0 +1,85 @@
+Found path: /media/jingbo/1TB_disk/02_Study/04_DeepLearning/04_Reinforcement_Learning/Udacity_Nanodegree_RL/deep-reinforcement-learning/p2_continuous-control/Reacher_Linux/Reacher.x86_64
+Mono path[0] = '/media/jingbo/1TB_disk/02_Study/04_DeepLearning/04_Reinforcement_Learning/Udacity_Nanodegree_RL/deep-reinforcement-learning/p2_continuous-control/Reacher_Linux/Reacher_Data/Managed'
+Mono config path = '/media/jingbo/1TB_disk/02_Study/04_DeepLearning/04_Reinforcement_Learning/Udacity_Nanodegree_RL/deep-reinforcement-learning/p2_continuous-control/Reacher_Linux/Reacher_Data/MonoBleedingEdge/etc'
+Preloaded 'ScreenSelector.so'
+Preloaded 'libgrpc_csharp_ext.x64.so'
+Unable to preload the following plugins:
+	ScreenSelector.so
+	libgrpc_csharp_ext.x86.so
+Logging to /home/jingbo/.config/unity3d/Unity Technologies/Unity Environment/Player.log
+Current environment is  Reacher_unity_v1
+State size is 33
+action size is 4
+A typical state looks like [[0.5        0.         0.5        1.         0.5        0.5
+  0.49999998 0.5        0.5        0.5        0.5        0.5
+  0.5        0.5        0.         0.5        1.         0.5
+  0.5        0.49999998 0.5        0.5        0.5        0.5
+  0.5        0.5        0.1059947  0.         0.19216925 0.5
+  1.         0.5        0.23349297]]
+Test parameters Namespace(actor_fc_units=128, actor_fc_units2=64, actor_weight='models/actor_iter1500_Reacher_unity_v1_episodes_1500_score_4.9535998892784112019_06_22_18_29_11_ddpg_reacher_model_2_lr_1e-3_checkpoint.pth', batch_size=1028, buffer_size=1000000, critic_fc_units1=64, critic_fc_units2=128, critic_fc_units3=64, critic_weight='models/critic_iter1500_Reacher_unity_v1_episodes_1500_score_4.9535998892784112019_06_22_18_29_11_ddpg_reacher_model_2_lr_1e-3_checkpoint.pth', device='gpu', env='Reacher_unity_v1', gamma=0.99, loss='mse', lr=0.0005, lr_actor=0.0001, lr_critic=0.001, max_t=2000, n_episode_bf_train=0, n_episode_stop_explore=2000, num_episodes=5000, per=False, replay_buffer_pickle='models/Reacher_unity_v12019_06_22_18_29_11_replay_buffer_iter1500ddpg_reacher_model_2_lr_1e-3', restart_iter=1500, retrain=True, save_replay=True, score_threshold=30, score_window_size=100, tau=0.001, testname='ddpg_reacher_model_2_lr_1e-3_retart1500', update_every=4, weight_decay=0, workers=8)
+Training uses GPU
+Actor weights initialized the same between local and target
+Critic weights initialized the same between local and target
+ReplayBuffer is instantiated
+
+Episode 1500	 Average Score: 7.04  	 Game length 1001 Critic Running Loss: 0.00131 Actor Running Loss: -0.72897
+Episode 1500	Average Score: 7.04 and Average game length 1001.0 critic running_loss 0.0013124557761475444 actor running_loss -0.7289720778465271
+saving replay buffer ...
+
+Episode 1501	 Average Score: 5.00  	 Game length 1001 Critic Running Loss: 0.00131 Actor Running Loss: -0.72929
+Episode 1502	 Average Score: 5.07  	 Game length 1001 Critic Running Loss: 0.00131 Actor Running Loss: -0.72920
+Episode 1503	 Average Score: 4.54  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.72925
+Episode 1504	 Average Score: 4.38  	 Game length 1001 Critic Running Loss: 0.00131 Actor Running Loss: -0.72931
+Episode 1505	 Average Score: 4.37  	 Game length 1001 Critic Running Loss: 0.00132 Actor Running Loss: -0.72927
+Episode 1506	 Average Score: 4.39  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.72924
+Episode 1507	 Average Score: 4.17  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.72948
+Episode 1508	 Average Score: 4.57  	 Game length 1001 Critic Running Loss: 0.00131 Actor Running Loss: -0.72936
+Episode 1509	 Average Score: 4.57  	 Game length 1001 Critic Running Loss: 0.00131 Actor Running Loss: -0.72944
+Episode 1510	 Average Score: 4.36  	 Game length 1001 Critic Running Loss: 0.00131 Actor Running Loss: -0.72964
+Episode 1511	 Average Score: 4.25  	 Game length 1001 Critic Running Loss: 0.00131 Actor Running Loss: -0.72976
+Episode 1512	 Average Score: 4.37  	 Game length 1001 Critic Running Loss: 0.00132 Actor Running Loss: -0.72996
+Episode 1513	 Average Score: 4.35  	 Game length 1001 Critic Running Loss: 0.00132 Actor Running Loss: -0.73008
+Episode 1514	 Average Score: 4.31  	 Game length 1001 Critic Running Loss: 0.00132 Actor Running Loss: -0.73019
+Episode 1515	 Average Score: 4.39  	 Game length 1001 Critic Running Loss: 0.00132 Actor Running Loss: -0.73027
+Episode 1516	 Average Score: 4.32  	 Game length 1001 Critic Running Loss: 0.00132 Actor Running Loss: -0.73046
+Episode 1517	 Average Score: 4.39  	 Game length 1001 Critic Running Loss: 0.00132 Actor Running Loss: -0.73058
+Episode 1518	 Average Score: 4.48  	 Game length 1001 Critic Running Loss: 0.00132 Actor Running Loss: -0.73079
+Episode 1519	 Average Score: 4.60  	 Game length 1001 Critic Running Loss: 0.00132 Actor Running Loss: -0.73085
+Episode 1520	 Average Score: 4.57  	 Game length 1001 Critic Running Loss: 0.00132 Actor Running Loss: -0.73092
+Episode 1521	 Average Score: 4.43  	 Game length 1001 Critic Running Loss: 0.00132 Actor Running Loss: -0.73102
+Episode 1522	 Average Score: 4.40  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73112
+Episode 1523	 Average Score: 4.48  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73124
+Episode 1524	 Average Score: 4.33  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73137
+Episode 1525	 Average Score: 4.27  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73147
+Episode 1526	 Average Score: 4.27  	 Game length 1001 Critic Running Loss: 0.00132 Actor Running Loss: -0.73158
+Episode 1527	 Average Score: 4.23  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73171
+Episode 1528	 Average Score: 4.45  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73184
+Episode 1529	 Average Score: 4.39  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73196
+Episode 1530	 Average Score: 4.27  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73204
+Episode 1531	 Average Score: 4.28  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73214
+Episode 1532	 Average Score: 4.23  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73223
+Episode 1533	 Average Score: 4.28  	 Game length 1001 Critic Running Loss: 0.00132 Actor Running Loss: -0.73231
+Episode 1534	 Average Score: 4.33  	 Game length 1001 Critic Running Loss: 0.00132 Actor Running Loss: -0.73242
+Episode 1535	 Average Score: 4.29  	 Game length 1001 Critic Running Loss: 0.00132 Actor Running Loss: -0.73252
+Episode 1536	 Average Score: 4.38  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73263
+Episode 1537	 Average Score: 4.33  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73271
+Episode 1538	 Average Score: 4.29  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73279
+Episode 1539	 Average Score: 4.24  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73289
+Episode 1540	 Average Score: 4.16  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73297
+Episode 1541	 Average Score: 4.19  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73305
+Episode 1542	 Average Score: 4.15  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73318
+Episode 1543	 Average Score: 4.20  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73329
+Episode 1544	 Average Score: 4.26  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73339
+Episode 1545	 Average Score: 4.33  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73348
+Episode 1546	 Average Score: 4.28  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73358
+Episode 1547	 Average Score: 4.25  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73368
+Episode 1548	 Average Score: 4.22  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73379
+Episode 1549	 Average Score: 4.27  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73389
+Episode 1550	 Average Score: 4.26  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73400
+Episode 1551	 Average Score: 4.24  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73409
+Episode 1552	 Average Score: 4.24  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73422
+Episode 1553	 Average Score: 4.20  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73430
+Episode 1554	 Average Score: 4.17  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73440
+Episode 1555	 Average Score: 4.18  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73450
+Episode 1556	 Average Score: 4.24  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73459
+Episode 1557	 Average Score: 4.24  	 Game length 1001 Critic Running Loss: 0.00133 Actor Running Loss: -0.73469
