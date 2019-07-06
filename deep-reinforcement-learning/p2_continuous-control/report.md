@@ -34,6 +34,15 @@ Critic: models/critic_Reacher_unity_v1_episodes_7203_score_31.114999304525554201
 
 Note in the reacher unity environment, the agent achieved average score > 30 for continous 100 games after 2503 episodes. The actor/critic network architectures turn out to be the key tests to solve the reacher environment. 
 
+Current unity environment doesn't provide a easy way to save images, we used kazam to save the screencast and created gif as shown below. Please refer [this notebook](notebook/Visualize_agent_play.ipynb) for usage. 
+```
+ffmpeg -i video.avi -t 10 out%d.gif
+```
+Reacher  Random Play |  Reacher  Agent Play
+:---------------:|:--------------:
+<img src="pics/random_agent_play_reacher.gif" width=360 alt="random" ALIGN="Middle">|<img src="pics/trained_agent_play_reacher.gif" width=360  alt="agent" ALIGN="Middle">
+
+
 
 # Future improvements
 - Test PPO agent use the same actor critic network to solve the reacher v2. 
