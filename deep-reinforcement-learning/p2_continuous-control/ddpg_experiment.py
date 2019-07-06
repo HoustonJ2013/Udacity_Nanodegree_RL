@@ -95,7 +95,7 @@ def main(args):
                 max_t=args.max_t, 
                 update_every=args.update_every,
                 n_episode_bf_train=args.n_episode_bf_train, ## Train start after n_episode 
-                n_episode_stop_explore=args.n_episode_stop_explore, 
+                n_episode_stop_explore=args.n_episode_stop_explore + args.restart_iter, 
                 device=device, 
                 loss=args.loss,
                 )
@@ -160,7 +160,7 @@ def main(args):
 
             torch.save(agent.actor_local.state_dict(), "models/actor_iter" + str(i_episode) + "_" + check_point_name)
             torch.save(agent.critic_local.state_dict(), "models/critic_iter" + str(i_episode) + "_" + check_point_name)
-        if np.mean(scores_window)>=args.score_threshold or i_episode == n_episodes:
+        if np.mean(scores_window)>=args.score_threshold or i_episode == args.restart_iter + n_episodes:
             print('\nEnvironment solved in {:d} episodes!\tAverage Score: {:.2f}'.format(i_episode-100, np.mean(scores_window)))
             check_point_name = args.env + "_episodes_" + str(i_episode) + "_score_" + str(np.mean(scores_window)) + now_string + \
                 "_" +  args.testname + "_checkpoint.pth"
@@ -176,6 +176,7 @@ def main(args):
             torch.save(agent.critic_local.state_dict(), "models/critic_" + check_point_name)
             
             print("saving models ...")
+            break
     
     score_name = args.env + "_episodes_" + str(i_episode) + "_score_" + str(np.mean(scores_window)) + now_string + "_" +  args.testname +  "_scores"
     np.save("models/" + score_name, scores)
@@ -216,7 +217,7 @@ if __name__ == "__main__":
     parser.add_argument('--env', type=str, default="Reacher_unity_v1")
     # parser.add_argument('--agent', type=str, default="ddpg")
     parser.add_argument('--n_episode_bf_train', type=int, default=0)
-    parser.add_argument('--n_episode_stop_explore', type=int, default=2000)
+    parser.add_argument('--n_episode_stop_explore', type=int, default=500)
     parser.add_argument('--num_episodes', type=int, default=2000,
                         help='no. of epoches to train the model')
     parser.add_argument('--max_t', type=int, default=2000)
