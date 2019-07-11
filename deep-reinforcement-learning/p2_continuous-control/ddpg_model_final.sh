@@ -1,1 +1,0 @@
-python ddpg_experiment.py --save_replay --env Reacher_unity_v1 --batch_size 1028 --n_episode_bf_train 0 --lr_actor 1e-4 --lr_critic 5e-4 --num_episodes 8000 --update_every 1 --device gpu  --testname ddpg_0619>  logs/ddpg_reacher_model_0619_eps8000
